@@ -165,7 +165,7 @@ function enviarPedido() {
 
     Array.from(resumenBody.children).forEach((row) => {
         const columnas = row.children;
-        pedidoText += `Producto: ${columnas[0].textContent}, Precio: ${columnas[1].textContent}, Cantidad: ${columnas[2].textContent}, Importe: ${columnas[3].textContent}\n`;
+        pedidoText += `\nProducto: ${columnas[0].textContent}, Precio: ${columnas[1].textContent}, Cantidad: ${columnas[2].textContent}, Importe: ${columnas[3].textContent}\n`;
     });
 
     pedidoText += `\nFlete: Municipio: ${municipio}, Colonia: ${colonia}, Costo: $${flete}\n`;
