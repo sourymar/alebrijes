@@ -15,10 +15,13 @@ const productos = [
 ];
 
 const municipios = {
-    Zapopan: { "Lomas de Atemajac": 150, "La Tijera": 100, "Palmira": 100, "Prolongación las Fuentes": 50, "Las Fuentes": 50, "Jardines del Sol": 60, "Miramar": 100, "Polanco": 50, "Lomas de Polanco": 60, "El Fortin": 100, "Gustavo Diaz Ordaz": 50, "Pinar de la Calma": 50, "La Calma": 50, "El Colli Urbano": 50, "Las aguilas": 50, "Arenales tapatios": 100, "El Sauz": 50, "Lomas de la primavera": 150 },
+    Zapopan: { "Lomas de Atemajac": 150, "La Tijera": 100, "Palmira": 100, "Prolongación las Fuentes": 50, "Las Fuentes": 50,
+         "Jardines del Sol": 60, "Miramar": 100, "Polanco": 50, "Lomas de Polanco": 60, "El Fortin": 100, "Gustavo Diaz Ordaz": 50, 
+         "Pinar de la Calma": 50, "La Calma": 50, "El Colli Urbano": 50, "Las aguilas": 50, "Arenales tapatios": 100, "El Sauz": 50,
+         "Loma bonita": 30, "Miramar": 100, "Lomas de la primavera": 150 },
     Guadalajara: { "Atlas Chapalita": 70, "Chapalita": 80, "Tres lagos": 180, "Rancho nuevo": 170, "Americana": 100 },
-    Tlajomulco: { "Las pintas": 100, "El fortin": 120, "Loma bonita": 30 },
-    Tlaquepaque: { "Las Huertas": 100, "Las Terrazas": 1500, "Miramar": 100 }
+    Tlajomulco: { "Las Pintas": 100, "El Fortin": 120, "El Palomar": 100 },
+    Tlaquepaque: { "Las Huertas": 100, "Las Terrazas": 1500, "El Alamo": 120 }
 };
 
 const horarioEventos = [
