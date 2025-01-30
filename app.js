@@ -32,6 +32,15 @@ const horarioEventos = [
     }),
 ];
 
+// Obtener el campo de fecha
+const campoFecha = document.getElementById('fecha-evento');
+
+// Obtener la fecha actual en formato YYYY-MM-DD
+const fechaActual = new Date().toISOString().split('T')[0];
+
+// Establecer la fecha mínima como la fecha actual
+campoFecha.setAttribute('min', fechaActual);
+
 function renderProductos() {
     const container = document.getElementById('product-list');
     productos.forEach((producto) => {
