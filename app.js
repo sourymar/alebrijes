@@ -42,7 +42,7 @@ function renderProductos() {
             <img src="${producto.imagen}" alt="${producto.nombre}">
             <h3>${producto.nombre}</h3>
             <p>Precio: $${producto.precio}</p>
-            <input type="number" id="cantidad-${producto.id}" placeholder="0" min="0">
+            <input type="number" id="cantidad-${producto.id}" placeholder="0" min="0" oninput="validarEntero(this)">
             <p>Importe: $<span id="importe-${producto.id}">0</span></p>
         `;
         container.appendChild(div);
@@ -98,6 +98,19 @@ function actualizarResumen() {
     document.getElementById('total-pagar').textContent = `Total a Pagar: $${total}`;
     document.getElementById('flete-importe').textContent = `Costo del Flete: $${flete}`;
     document.getElementById('total-final').textContent = `Total Final: $${total}`;
+}
+
+function validarEntero(input) {
+    // Elimina cualquier carácter que no sea un número entero
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    // Convierte el valor a número entero
+    const valor = parseInt(input.value, 10);
+
+    // Si el valor es mayor que 500, lo ajusta a 500
+    if (valor > 500) {
+        input.value = 500;
+    }
 }
 
 function setupMunicipios() {
