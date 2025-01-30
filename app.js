@@ -2,12 +2,12 @@
 
 const productos = [
     { id: 1, nombre: "Mesa con 10 sillas", precio: 200, imagen: "mesa_con_10_sillas.png" },
-    { id: 2, nombre: "Mesa 2.40 mts.", precio: 90, imagen: "mesa.png" },
-    { id: 3, nombre: "Mesa 1.80 mts.", precio: 80, imagen: "mesa.png" },
+    { id: 2, nombre: "Mesa 2.40 mts.", precio: 100, imagen: "mesa.png" },
+    { id: 3, nombre: "Mesa 1.80 mts.", precio: 90, imagen: "mesa.png" },
     { id: 4, nombre: "Mesa 1.20 mts.", precio: 70, imagen: "mesa.png" },
     { id: 5, nombre: "Silla acojinada", precio: 15, imagen: "silla_acojinada.png" },
-    { id: 6, nombre: "Mantel blanco", precio: 80, imagen: "mantel.png" },
-    { id: 7, nombre: "Mantel negro", precio: 80, imagen: "mantel_negro.png" },
+    { id: 6, nombre: "Mantel blanco", precio: 70, imagen: "mantel.png" },
+    { id: 7, nombre: "Mantel negro", precio: 70, imagen: "mantel_negro.png" },
     { id: 8, nombre: "Toldo 6x3", precio: 650, imagen: "toldo_6x3.png" },
     { id: 9, nombre: "Toldo con 1 mesa y 10 sillas", precio: 800, imagen: "toldo_con_1_mesa.png" },
     { id: 10, nombre: "Toldo con 2 mesas y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
@@ -15,13 +15,17 @@ const productos = [
 ];
 
 const municipios = {
-    Zapopan: { "Lomas de Atemajac": 150, "La Tijera": 100, "Palmira": 100, "Prolongación las Fuentes": 50, "Las Fuentes": 50,
-         "Jardines del Sol": 60, "Miramar": 100, "Polanco": 50, "Lomas de Polanco": 60, "El Fortin": 100, "Gustavo Diaz Ordaz": 50, 
-         "Pinar de la Calma": 50, "La Calma": 50, "El Colli Urbano": 50, "Las aguilas": 50, "Arenales tapatios": 100, "El Sauz": 50,
-         "Loma bonita": 30, "Miramar": 100, "Lomas de la primavera": 150 },
+    El_Salto: { "San Martin de las Flores": 150, "San Jose el Verde": 100, "Las Pintitas": 100},
     Guadalajara: { "Atlas Chapalita": 70, "Chapalita": 80, "Tres lagos": 180, "Rancho nuevo": 170, "Americana": 100 },
-    Tlajomulco: { "Las Pintas": 100, "El Fortin": 120, "El Palomar": 100 },
-    Tlaquepaque: { "Las Huertas": 100, "Las Terrazas": 1500, "El Alamo": 120 }
+    Tlajomulco: { "Santa Anita": 100, "Hacienda San Miguel": 120, "El Palomar": 100, "Hacienda Santa Fe": 100, "Real del Valle": 100, 
+        "San Sebastian el Grande": 100, "Rancho las Moras": 100, "Residencial San Pablo": 100, "La Calerilla": 100, "Las Pomas": 100, 
+        "Los Gavilanes": 100, "Pontevedra": 100, "Bosques Santa Anita": 100, "Bosque Real": 100, "Rinconada Santa Anita": 100, 
+        "San Agustin": 100, "Los Magueyes": 100, "Los Abedules": 100 },
+    Tlaquepaque: { "Las Huertas": 100, "Las Terrazas": 1500, "Terralta": 120 },
+    Zapopan: { "Lomas de Atemajac": 150, "La Tijera": 100, "Palmira": 100, "Prolongación las Fuentes": 50, "Las Fuentes": 50,
+        "Jardines del Sol": 60, "Miramar": 100, "Polanco": 50, "Lomas de Polanco": 60, "El Fortin": 100, "Gustavo Diaz Ordaz": 50, 
+        "Pinar de la Calma": 50, "La Calma": 50, "El Colli Urbano": 50, "Las aguilas": 50, "Arenales tapatios": 100, "El Sauz": 50,
+        "Loma bonita": 30, "Miramar": 100, "Lomas de la primavera": 150 },
 };
 
 const horarioEventos = [
@@ -190,7 +194,7 @@ function enviarPedido() {
 
     Array.from(resumenBody.children).forEach((row) => {
         const columnas = row.children;
-        pedidoText += `Producto: ${columnas[0].textContent}, Precio: ${columnas[1].textContent}, Cantidad: ${columnas[2].textContent}, Importe: ${columnas[3].textContent}\n`;
+        pedidoText += `\nProducto: ${columnas[0].textContent}, Precio: ${columnas[1].textContent}, Cantidad: ${columnas[2].textContent}, Importe: ${columnas[3].textContent}\n\n`;
     });
 
     pedidoText += `\nFlete: Municipio: ${municipio}, Colonia: ${colonia}, Costo: $${flete}\n`;
@@ -198,7 +202,7 @@ function enviarPedido() {
     pedidoText += `\nTotal a Pagar: ${total}\n`;
     pedidoText += `\nDatos del Cliente:\nNombre: ${nombre}\nTeléfono: ${telefono}\nDirección: ${direccion}\nFecha del Evento: ${fechaEvento}\nHora del Evento: ${horaEvento}`;
 
-    const url = `https://wa.me/3314687877?text=${encodeURIComponent(pedidoText)}`;
+    const url = `https://wa.me/3314423619?text=${encodeURIComponent(pedidoText)}`;
     window.open(url, '_blank');
 }
 
@@ -224,16 +228,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const resumenArticulos = Array.from(document.querySelectorAll('#order-summary tr'))
             .map(row => {
                 const cells = row.querySelectorAll('td');
-                return `${cells[0].textContent} - Precio: ${cells[1].textContent}, Cantidad: ${cells[2].textContent}, Importe: ${cells[3].textContent}`;
+                return `++++\n^${cells[0].textContent} - Precio: ${cells[1].textContent}, Cantidad: ${cells[2].textContent}, Importe: ${cells[3].textContent}`;
             }).join('\n');
 
         if (!nombre || !telefono || !direccion || !fechaEvento || !horaEvento) {
             alert("Por favor, completa todos los datos del evento.");
             return;
         }
-        const mensaje = `Hola, me interesa agendar lo siguiente:%0A*Datos del Pedido*%0A${resumenArticulos}%0A%0A${resumenFlete}%0A${totalPagar}%0A%0A*Datos del Evento*%0ANombre: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}%0AFecha del Evento: ${fechaEvento}%0AHora del Evento: ${horaEvento}`;
+        const mensaje = `Hola, me interesa agendar el siguiente mobiliario:%0A*Datos del Pedido*%0A${resumenArticulos}%0A%0A${resumenFlete}%0A${totalPagar}%0A%0A*Datos del Evento*%0AOrganizador: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}%0AFecha del Evento: ${fechaEvento}%0AHora del Evento: ${horaEvento}`;
 
-        const urlWhatsapp = `https://wa.me/3314687877?text=${mensaje}`;
+        const urlWhatsapp = `https://wa.me/3314423619?text=${mensaje}`;
         window.open(urlWhatsapp, '_blank');
     });
 });
