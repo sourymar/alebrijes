@@ -11,7 +11,7 @@ const productos = [
     { id: 8, nombre: "Toldo 6x3", precio: 650, imagen: "toldo_6x3.png" },
     { id: 9, nombre: "Toldo con 1 mesa y 10 sillas", precio: 800, imagen: "toldo_con_1_mesa.png" },
     { id: 10, nombre: "Toldo con 2 mesas y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
-    { id: 11, nombre: "Toldo con 3 mesas y 30 sillas", precio: 1100, imagen: "toldo_con_1_mesa.png" }
+    { id: 11, nombre: "Toldo con 3 mesas y 30 sillas", precio: 1100, imagen: "toldo_con_3_mesas.jpeg" }
 ];
 
 const municipios = {
