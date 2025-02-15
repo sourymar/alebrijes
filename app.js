@@ -16,14 +16,15 @@ const productos = [
 ];
 
 const municipios = {
-    El_Salto: { "San Martin de las Flores": 150, 
-        "San Jose el Verde": 100, 
-        "Las Pintitas": 100},
+    El_Salto: { "San Martin de las Flores": 210, 
+        "San Jose el Verde": 200, 
+        "Las Pintitas": 190},
     Guadalajara: { "Atlas Chapalita": 70, 
         "Chapalita": 80, 
         "Tres lagos": 180, 
         "Rancho nuevo": 170, 
-        "Americana": 100 },
+        "Moderna": 80,
+        "Americana": 90 },
     Tlajomulco: { "Santa Anita": 100, 
         "Hacienda San Miguel": 120, 
         "El Palomar": 100, 
@@ -46,11 +47,12 @@ const municipios = {
         "Las Terrazas": 150, 
         "Terralta": 120 },
     Zapopan: { "Lomas de Atemajac": 150, 
+        "Altavista Residencial": 270,
         "La Tijera": 100, 
         "Palmira": 100, 
         "Prolongación las Fuentes": 50, 
         "Las Fuentes": 50,
-        "Jardines del Sol": 60, 
+        "Jardines del Sol": 70, 
         "Miramar": 100, 
         "Polanco": 50, 
         "Lomas de Polanco": 60, 
@@ -62,9 +64,10 @@ const municipios = {
         "Las aguilas": 50, 
         "Arenales tapatios": 100, 
         "El Sauz": 50,
-        "Loma bonita": 50, 
-        "Miramar": 100, 
-        "Lomas de la primavera": 150 },
+        "Loma Bonita": 50, 
+        "Loma Bonita Ejidal": 50, 
+        "El Palomar": 100, 
+        "Lomas de la primavera": 100 },
 };
 
 const horarioEventos = [
@@ -110,6 +113,40 @@ function renderProductos() {
         });
     });
 }
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
+// Bloquear arrastre de imágenes
+document.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Opcional: CSS para evitar selección de elementos
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+    </style>
+`);
+
+document.addEventListener('keydown', function(e) {
+    // Bloquear Ctrl + S (Guardar página)
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+    }
+    // Bloquear Ctrl + C (Copiar)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+        e.preventDefault();
+    }
+});
 
 function actualizarResumen() {
     const resumenBody = document.getElementById('order-summary');
