@@ -1,18 +1,30 @@
 // app.js
 
 const productos = [
-    { id: 1, nombre: "Mesa con 10 sillas", precio: 200, imagen: "mesa_con_10_sillas.png" },
-    { id: 2, nombre: "Mesa 2.40 mts.", precio: 100, imagen: "mesa.png" },
-    { id: 3, nombre: "Mesa 1.80 mts.", precio: 90, imagen: "mesa.png" },
-    { id: 4, nombre: "Mesa 1.20 mts.", precio: 70, imagen: "mesa.png" },
-    { id: 5, nombre: "Silla acojinada", precio: 15, imagen: "silla_acojinada.png" },
-    { id: 6, nombre: "Mantel blanco", precio: 70, imagen: "mantel.png" },
-    { id: 7, nombre: "Mantel negro", precio: 70, imagen: "mantel_negro.png" },
-    { id: 8, nombre: "Toldo 6x3", precio: 650, imagen: "toldo_6x3.png" },
-    { id: 9, nombre: "Toldo con 1 mesa y 10 sillas", precio: 800, imagen: "toldo_con_1_mesa.png" },
-    { id: 10, nombre: "Toldo con 2 mesas y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
-    { id: 11, nombre: "Toldo con 3 mesas y 30 sillas", precio: 1100, imagen: "toldo_con_3_mesas.jpeg" },
-    { id: 12, nombre: "Caballete infantil doble (incluye 2 sillas, 6 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" }
+    { id: 1, nombre: "Mesa plegable con 10 sillas", precio: 200, imagen: "mesa_con_10_sillas.png" },
+    { id: 2, nombre: "Mesa redonda con 10 sillas", precio: 250, imagen: "mesa_redonda.jpg" },
+    { id: 3, nombre: "Mesa 2.40 mts.", precio: 100, imagen: "mesa.png" },
+    { id: 4, nombre: "Mesa 1.80 mts.", precio: 90, imagen: "mesa.png" },
+    { id: 5, nombre: "Mesa 1.20 mts.", precio: 70, imagen: "mesa.png" },
+    { id: 6, nombre: "Mesa redonda 1.50 mts.", precio: 120, imagen: "mesa_redonda_sola.jpg" },
+    { id: 7, nombre: "Silla acojinada", precio: 15, imagen: "silla_acojinada.png" },
+    { id: 8, nombre: "Mantel rectangular blanco", precio: 70, imagen: "mantel.png" },
+    { id: 9, nombre: "Mantel rectangular negro", precio: 70, imagen: "mantel_negro.png" },
+    { id: 10, nombre: "Mantel redondo negro", precio: 90, imagen: "mantel_redondo_negro.png" },
+    { id: 11, nombre: "Mantel redondo blanco", precio: 90, imagen: "mantel_redondo_blanco.png" },
+    { id: 12, nombre: "Toldo 6x3", precio: 650, imagen: "toldo_6x3.png" },
+    { id: 13, nombre: "Toldo con 1 mesa rectangular y 10 sillas", precio: 800, imagen: "toldo_con_1_mesa.png" },
+    { id: 14, nombre: "Toldo con 2 mesas rectangulares y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
+    { id: 15, nombre: "Toldo con 3 mesas rectangulares y 30 sillas", precio: 1100, imagen: "toldo_con_3_mesas.jpeg" },
+    { id: 16, nombre: "Hielera 90 lts.", precio: 300, imagen: "hielera.jpg" },
+    { id: 17, nombre: "Asador grande", precio: 400, imagen: "asador.jpg" },
+    { id: 18, nombre: "Bocina grande", precio: 350, imagen: "bocina.png" },
+    { id: 19, nombre: "Mesa infantil con 4 sillas", precio: 100, imagen: "mesita4.png" },
+    { id: 20, nombre: "Mesa infantil con 6 sillas", precio: 120, imagen: "mesita6.png" },
+    { id: 21, nombre: "Silla infantil varios colores", precio: 10, imagen: "silla_infantil.jpeg" },
+    { id: 22, nombre: "Caballete infantil doble (incluye 2 sillas, 6 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" },
+    { id: 23, nombre: "Paquete fiesta 1 (incluye toldo, 3 mesas rectangulares, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2000, imagen: "paquete_fiesta1.png" },
+    { id: 24, nombre: "Paquete fiesta 2 (incluye toldo, 3 mesas redondas, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2300, imagen: "paquete_fiesta1.png" }
 ];
 
 const municipios = {
