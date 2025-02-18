@@ -17,12 +17,12 @@ const productos = [
     { id: 14, nombre: "Toldo con 2 mesas rectangulares y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
     { id: 15, nombre: "Toldo con 3 mesas rectangulares y 30 sillas", precio: 1100, imagen: "toldo_con_3_mesas.jpeg" },
     { id: 16, nombre: "Hielera 90 lts.", precio: 300, imagen: "hielera.jpg" },
-    { id: 17, nombre: "Asador grande", precio: 400, imagen: "asador.jpg" },
-    { id: 18, nombre: "Bocina grande", precio: 350, imagen: "bocina.png" },
+    { id: 17, nombre: "Asador con 1 bolsa de carbón y utensilios", precio: 450, imagen: "asador.jpg" },
+    { id: 18, nombre: "Bocina bluetooth con tripie", precio: 350, imagen: "bocina.png" },
     { id: 19, nombre: "Mesa infantil con 4 sillas", precio: 100, imagen: "mesita4.png" },
     { id: 20, nombre: "Mesa infantil con 6 sillas", precio: 120, imagen: "mesita6.png" },
     { id: 21, nombre: "Silla infantil varios colores", precio: 10, imagen: "silla_infantil.jpeg" },
-    { id: 22, nombre: "Caballete infantil doble (incluye 2 sillas, 6 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" },
+    { id: 22, nombre: "Caballete infantil doble (incluye 2 sillas, 10 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" },
     { id: 23, nombre: "Paquete fiesta 1 (incluye toldo, 3 mesas rectangulares, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2000, imagen: "paquete_fiesta1.png" },
     { id: 24, nombre: "Paquete fiesta 2 (incluye toldo, 3 mesas redondas, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2300, imagen: "paquete_fiesta1.png" }
 ];
@@ -278,7 +278,7 @@ function enviarPedido() {
     const flete = municipios[municipio]?.[colonia] || 0;
 
     const resumenBody = document.getElementById('order-summary');
-    let pedidoText = `Datos del Pedido:\n\n`;
+    let pedidoText = `Datos de la Cotización:\n\n`;
 
     Array.from(resumenBody.children).forEach((row) => {
         const columnas = row.children;
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, completa todos los datos del evento.");
             return;
         }
-        const mensaje = `Hola, me interesa agendar el siguiente mobiliario:%0A*Datos del Pedido*%0A${resumenArticulos}%0A%0A${resumenFlete}%0A${totalPagar}%0A%0A*Datos del Evento*%0AOrganizador: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}%0AFecha del Evento: ${fechaEvento}%0AHora del Evento: ${horaEvento}`;
+        const mensaje = `Hola, me interesa confirmar la cotización del siguiente mobiliario:%0A*Datos del Pedido*%0A${resumenArticulos}%0A%0A${resumenFlete}%0A${totalPagar}%0A%0A*Datos del Evento*%0AOrganizador: ${nombre}%0ATeléfono: ${telefono}%0ADirección: ${direccion}%0AFecha del Evento: ${fechaEvento}%0AHora del Evento: ${horaEvento}`;
 
         const urlWhatsapp = `https://wa.me/3314423619?text=${mensaje}`;
         window.open(urlWhatsapp, '_blank');
