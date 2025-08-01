@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alebrijes Diversión Total - Carrito de Compras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .product-total {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .flete-section, .resumen-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        .order-table th, .order-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .total-section {
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-reset {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantity-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><img src="logo.png" alt="Logo de Alebrijes" style="width:60px;height:60px;vertical-align:middle;margin-right:15px;">Alebrijes Diversión Total</h1>
+            <p>Renta de Mobiliario para Eventos</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('mobiliario')">MOBILIARIO</button>
+            <button class="tab" onclick="showTab('toldos')">TOLDOS</button>
+            <button class="tab" onclick="showTab('infantiles')">INFANTILES</button>
+            <button class="tab" onclick="showTab('paquetes')">PAQUETES</button>
+        </div>
+
+        <div id="mobiliario" class="tab-content active">
+            <div class="products-grid" id="mobiliario-products"></div>
+        </div>
+
+        <div id="toldos" class="tab-content">
+            <div class="products-grid" id="toldos-products"></div>
+        </div>
+
+        <div id="infantiles" class="tab-content">
+            <div class="products-grid" id="infantiles-products"></div>
+        </div>
+
+        <div id="paquetes" class="tab-content">
+            <div class="products-grid" id="paquetes-products"></div>
+        </div>
+
+        <div class="flete-section">
+            <h2>🚚 Flete</h2>
+            <div class="form-group">
+                <label for="municipio">Municipio:</label>
+                <select id="municipio" onchange="loadColonies()">
+                    <option value="">--Selecciona un municipio--</option>
+                    <option value="guadalajara">Guadalajara</option>
+                    <option value="zapopan">Zapopan</option>
+                    <option value="tlaquepaque">Tlaquepaque</option>
+                    <option value="tlajomulco">Tlajomulco</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="colonia">Colonia:</label>
+                <select id="colonia" disabled onchange="selectColony()">
+                    <option value="">--Primero selecciona un municipio--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="resumen-section">
+            <h2>📋 Datos del Pedido</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody id="order-summary"></tbody>
+            </table>
+            <div class="total-section">
+                <div id="flete-info">Flete: $0</div>
+                <div class="total-amount" id="total-amount">Total: $0</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-reset" onclick="resetCart()">🔄 Restablecer Campos</button>
+            <button class="btn btn-whatsapp" onclick="sendWhatsApp()">📱 Solicitar Cotización</button>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            mobiliario: [
+                {name: "Silla cromada acojinada", price: 15},
+                {name: "Mesa 2.40 con mantel", price: 140},
+                {name: "Mesa 1.80 con mantel", price: 140},
+                {name: "Mantel rectangular negro", price: 70},
+                {name: "Mantel rectangular blanco", price: 70},
+                {name: "Mantel redondo negro", price: 100},
+                {name: "Mantel redondo blanco", price: 100},
+                {name: "Mesa 2.40", price: 100},
+                {name: "Mesa 1.80", price: 90},
+                {name: "Mesa 1.20", price: 80},
+                {name: "Bocina JBL", price: 500},
+                {name: "Bocina con micrófono", price: 600}
+            ],
+            toldos: [
+                {name: "Toldo 6x3", price: 650},
+                {name: "Toldo 3x3", price: 400},
+                {name: "Toldo 2x2", price: 200}
+            ],
+            infantiles: [
+                {name: "Mesa para 6", price: 130},
+                {name: "Mesa para 4", price: 110},
+                {name: "Silla infantil", price: 13}
+            ],
+            paquetes: [
+                {name: "Mesa con 10 sillas", price: 200},
+                {name: "Toldo 6x3 con 2 mesas y 20 sillas", price: 950},
+                {name: "Toldo 6x3 con 3 mesas y 30 sillas", price: 1100}
+            ]
+        };
+
+        const colonies = {
+            guadalajara: [
+                {name: "Centro", price: 100},
+                {name: "Americana", price: 150},
+                {name: "Providencia", price: 100},
+                {name: "Del Valle", price: 50},
+                {name: "Chapalita", price: 100}
+            ],
+            zapopan: [
+                {name: "Zapopan Centro", price: 100},
+                {name: "Tesistán", price: 150},
+                {name: "La Calma", price: 100},
+                {name: "El Colli", price: 150},
+                {name: "Tabachines", price: 50}
+            ],
+            tlaquepaque: [
+                {name: "Centro Tlaquepaque", price: 100},
+                {name: "San Pedrito", price: 150},
+                {name: "La Madrugada", price: 100},
+                {name: "Buenos Aires", price: 50}
+            ],
+            tlajomulco: [
+                {name: "Centro Tlajomulco", price: 150},
+                {name: "Haciendas de Tlajomulco", price: 100},
+                {name: "Lomas de Tlajomulco", price: 150},
+                {name: "Valle Real", price: 100}
+            ]
+        };
+
+        let cart = {};
+        let fletePrice = 0;
+        let selectedColony = '';
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function createProductCard(product, category) {
+            const productId = `${category}-${product.name.replace(/\s+/g, '-').toLowerCase()}`;
+            
+            return `
+                <div class="product-card">
+                    <div class="product-image">📦 Imagen</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">$${product.price}</div>
+                    <div class="quantity-section">
+                        <label>Cantidad:</label>
+                        <input type="number" class="quantity-input" id="${productId}" 
+                               min="0" max="100" value="0" 
+                               onchange="updateCart('${productId}', '${product.name}', ${product.price})">
+                    </div>
+                    <div class="product-total" id="${productId}-total">Importe: $0</div>
+                </div>
+            `;
+        }
+
+        function loadProducts() {
+            Object.keys(products).forEach(category => {
+                const container = document.getElementById(`${category}-products`);
+                container.innerHTML = products[category]
+                    .map(product => createProductCard(product, category))
+                    .join('');
+            });
+        }
+
+        function updateCart(productId, productName, price) {
+            const quantity = parseInt(document.getElementById(productId).value) || 0;
+            const total = quantity * price;
+            
+            document.getElementById(`${productId}-total`).textContent = `Importe: $${total}`;
+            
+            if (quantity > 0) {
+                cart[productId] = {name: productName, quantity, price, total};
+            } else {
+                delete cart[productId];
+            }
+            
+            updateOrderSummary();
+        }
+
+        function loadColonies() {
+            const municipio = document.getElementById('municipio').value;
+            const coloniaSelect = document.getElementById('colonia');
+            
+            coloniaSelect.innerHTML = '<option value="">--Selecciona una colonia--</option>';
+            
+            if (municipio && colonies[municipio]) {
+                coloniaSelect.disabled = false;
+                colonies[municipio].forEach(colony => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify(colony);
+                    option.textContent = `${colony.name} - $${colony.price}`;
+                    coloniaSelect.appendChild(option);
+                });
+            } else {
+                coloniaSelect.disabled = true;
+                fletePrice = 0;
+                selectedColony = '';
+                updateOrderSummary();
+            }
+        }
+
+        function selectColony() {
+            const colonyData = document.getElementById('colonia').value;
+            if (colonyData) {
+                const colony = JSON.parse(colonyData);
+                fletePrice = colony.price;
+                selectedColony = colony.name;
+            } else {
+                fletePrice = 0;
+                selectedColony = '';
+            }
+            updateOrderSummary();
+        }
+
+        function updateOrderSummary() {
+            const tbody = document.getElementById('order-summary');
+            const fleteInfo = document.getElementById('flete-info');
+            const totalAmount = document.getElementById('total-amount');
+            
+            let html = '';
+            let subtotal = 0;
+            
+            Object.values(cart).forEach(item => {
+                html += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>$${item.price}</td>
+                        <td>$${item.total}</td>
+                    </tr>
+                `;
+                subtotal += item.total;
+            });
+            
+            tbody.innerHTML = html;
+            fleteInfo.textContent = `Flete (${selectedColony || 'No seleccionado'}): $${fletePrice}`;
+            totalAmount.textContent = `Total: $${subtotal + fletePrice}`;
+        }
+
+        function resetCart() {
+            cart = {};
+            fletePrice = 0;
+            selectedColony = '';
+            
+            document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
+            document.querySelectorAll('[id$="-total"]').forEach(total => total.textContent = 'Importe: $0');
+            document.getElementById('municipio').value = '';
+            document.getElementById('colonia').innerHTML = '<option value="">--Primero selecciona un municipio--</option>';
+            document.getElementById('colonia').disabled = true;
+            
+            updateOrderSummary();
+        }
+
+        function sendWhatsApp() {
+            let message = "🎪 *COTIZACIÓN ALEBRIJES DIVERSIÓN TOTAL*\n\n";
+            
+            if (Object.keys(cart).length === 0) {
+                alert('Por favor selecciona al menos un producto');
+                return;
+            }
+            
+            message += "📦 *PRODUCTOS:*\n";
+            let subtotal = 0;
+            
+            Object.values(cart).forEach(item => {
+                message += `• ${item.name} - Cantidad: ${item.quantity} - $${item.price} c/u = $${item.total}\n`;
+                subtotal += item.total;
+            });
+            
+            message += `\n🚚 *FLETE:* ${selectedColony || 'No seleccionado'} - $${fletePrice}\n`;
+            message += `\n💰 *TOTAL: $${subtotal + fletePrice}*\n\n`;
+            message += "¡Gracias por tu preferencia! 🎉";
+            
+            const whatsappUrl = `https://wa.me/523314423619?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Inicializar la página
+        loadProducts();
+    </script>
+</body>
+</html>

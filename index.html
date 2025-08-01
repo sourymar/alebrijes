@@ -9,112 +9,107 @@
 </head>
 <body>
     <div class="container">
-    <header>
-        <img src="logo.png" alt="Logo de Alebrijes" style="width:100px;height:100px">
-            <h1>COTIZADOR - Renta de mobiliario</h1>
-        
-    </header>
-    <main>
-        <section id="terms-section">
-            <button class="collapsible">
-            <h3>Terminos y Condiciones del Servicio</h3></button>
-            <div id="terms-content" style="display: none;">
-                <div class="content">
-                    <p>El pedido esta sujeto a disponibilidad de los artículos en nuestro inventario. 
-                        <br>Servicio de Lunes a Domingo.</p>
-                <p></p>
-                <p>Politicas de Renta:
-                    <br>1. La cotización del pedido se confirmará via WhatsApp, una vez confirmado se agendará con los datos del evento.
-                    <br>2. El pago del mobiliario es a la entrega del mismo en efectivo o con el metodo de pago acordado al agendar.
-                    <br>3. La renta es por el día y el mobiliario se recoge al siguiente día en el transcurso de la mañana a partir de las 10:00 a.m. o el mismo día al termino del evento en caso de ser necesario.
-                    <br>4. El cliente es responsable de cualquier daño ocasionado al mobiliario por uso de CERA, PINTURA, PEGAMENTO.
-                    <br>5. En caso de daño al mobiliario el cliente tendrá que cubrir el costo de reposición correspondiente al artículo dañado.</p>
-                <p>Condiciones Generales:<br>
-    1. Cambios de precios: Todos los precios están sujetos a cambios sin previo aviso por lo que se sugiere confirmar los datos de la cotización por WhatsApp.
-    <br>2. Pedidos: Para realizar cualquier pedido es necesario enviar los datos al WhatsApp 3314423619, una vez recibidos se confirman los datos e importes y se agenda para entrega con horario tentativo.
-    <br>3. Disponibilidad: Todos los artículos se encuentran sujetos a disponibilidad, no se garantiza la existencia de los productos al ser solicitados el mismo día o un día antes.
-    <br>4. Formas de pago: 
-    <br>---Efectivo 
-    <br>---Transferencia se tendrá que pagar 16% adicional por concepto de IVA
-    <br>---Tarjeta de credito o debito se tendrá que pagar 16% adicional por concepto de IVA más un una comisión del 5%
-    <br>5. Facturación: Se tendrá que pagar 16% adicional por concepto de IVA. En caso de requerir factura deberá solicitarla al agendar y hacer llegar sus datos completos por WhatsApp o al correo alebrijesdt@gmail.com en el mismo mes de pago, no se facturará en otro mes o después de enviado el mobiliario.</p>
-            
+        <header>
+            <img src="logo.png" alt="Logo de Alebrijes" style="width:100px;height:100px">
+                <h1>COTIZADOR - Renta de mobiliario</h1>  
+        </header>
+        <main>
+            <section id="terms-section">
+                <button class="collapsible">
+                <h3>Terminos y Condiciones del Servicio</h3></button>
+                <div id="terms-content" style="display: none;">
+                    <div class="content">
+                        <p>El pedido esta sujeto a disponibilidad de los artículos en nuestro inventario. 
+                            <br>Servicio de Lunes a Domingo.</p>
+                        <p></p>
+                        <p>Politicas de Renta:
+                            <br>1. La cotización del pedido se confirmará via WhatsApp, una vez confirmado se agendará con los datos del evento.
+                            <br>2. El pago del mobiliario es a la entrega del mismo en efectivo o con el metodo de pago acordado al agendar.
+                            <br>3. La renta es por el día y el mobiliario se recoge al siguiente día en el transcurso de la mañana a partir de las 10:00 a.m. o el mismo día al termino del evento en caso de ser necesario.
+                            <br>4. El cliente es responsable de cualquier daño ocasionado al mobiliario por uso de CERA, PINTURA, PEGAMENTO.
+                            <br>5. En caso de daño al mobiliario el cliente tendrá que cubrir el costo de reposición correspondiente al artículo dañado.</p>
+                        <p>Condiciones Generales:
+                            <br>1. Cambios de precios: Todos los precios están sujetos a cambios sin previo aviso por lo que se sugiere confirmar los datos de la cotización por WhatsApp.
+                            <br>2. Pedidos: Para realizar cualquier pedido es necesario enviar los datos al WhatsApp 3314423619, una vez recibidos se confirman los datos e importes y se agenda para entrega con horario tentativo.
+                            <br>3. Disponibilidad: Todos los artículos se encuentran sujetos a disponibilidad, no se garantiza la existencia de los productos al ser solicitados el mismo día o un día antes.
+                            <br>4. Formas de pago: 
+                            <br>---Efectivo 
+                            <br>---Transferencia se tendrá que pagar 16% adicional por concepto de IVA
+                            <br>---Tarjeta de credito o debito se tendrá que pagar 16% adicional por concepto de IVA más un una comisión del 5%
+                            <br>5. Facturación: Se tendrá que pagar 16% adicional por concepto de IVA. En caso de requerir factura deberá solicitarla al agendar y hacer llegar sus datos completos por WhatsApp o al correo alebrijesdt@gmail.com en el mismo mes de pago, no se facturará en otro mes o después de enviado el mobiliario.
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section id="products">
-            <h2>Bienvenid@, selecciona el mobiliario:</h2>
-            <div id="product-list" class="product-list">
+            </section>
+
+            <section id="products">
+                <h2>Bienvenid@, selecciona el mobiliario:</h2>
+                <div id="product-list" class="product-list">
                 
-                
-            </div>
-            
-        </section>
-
-        <section id="flete">
-            <h2>Flete</h2>
-            <form id="flete-form">
-                <label for="municipio">Selecciona un municipio:</label>
-                <select id="municipio" name="municipio">
-                    <option value="">--Selecciona un municipio--</option>
-                </select>
-
-                <label for="colonia">Selecciona o escribe una colonia:</label>
-                <input list="colonias" id="colonia" name="colonia" placeholder="Colonia">
-                <datalist id="colonias"></datalist>
-
-                <p id="flete-label">Costo de Flete: $0</p>
-            </form>
-        </section>
-
-        <section id="resumen">
-            <h2>Datos de la Cotización</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Importe</th>
-                    </tr>
-                </thead>
-                <tbody id="order-summary"></tbody>
-            </table>
-
-            <p id="resumen-flete">Municipio: - | Colonia: - | Flete: $0</p>
-            <p id="total-pagar">Total a Pagar: $0</p>
-        </section>
-
-        <section id="datos-pedido">
-            <h2>Datos del Evento</h2>
-            <form id="pedido-form">
-                <label for="nombre">Nombre del organizador:</label>
-                <input type="text" id="nombre" name="nombre" required>
-
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
-
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required>
-
-                <label for="fecha-evento">Fecha:</label>
-                <input type="date" id="fecha-evento" name="fecha-evento" required>
-
-                <label for="hora-evento">Hora:</label>
-                <select id="hora-evento" name="hora-evento">
-                    <option value="">--Selecciona la hora--</option>
-                </select>
-
-                <div class="buttons">
-                    <button type="button" id="reset">Restablecer</button>
-                    <button type="button" id="send-order">Confirmar Cotización</button>
                 </div>
-            </form>
-        </section>
-    
-    
-</main>
-</div>
-    
+            </section>
+
+            <section id="flete">
+                <h2>Flete</h2>
+                <form id="flete-form">
+                    <label for="municipio">Selecciona un municipio:</label>
+                    <select id="municipio" name="municipio">
+                        <option value="">--Selecciona un municipio--</option>
+                    </select>
+
+                    <label for="colonia">Selecciona o escribe una colonia:</label>
+                    <input list="colonias" id="colonia" name="colonia" placeholder="Colonia">
+                    <datalist id="colonias"></datalist>
+
+                    <p id="flete-label">Costo de Flete: $0</p>
+                </form>
+            </section>
+
+            <section id="resumen">
+                <h2>Datos de la Cotización</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-summary"></tbody>
+                </table>
+
+                <p id="resumen-flete">Municipio: - | Colonia: - | Flete: $0</p>
+                <p id="total-pagar">Total a Pagar: $0</p>
+            </section>
+
+            <section id="datos-pedido">
+                <h2>Datos del Evento</h2>
+                <form id="pedido-form">
+                    <label for="nombre">Nombre del organizador:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required>
+
+                    <label for="fecha-evento">Fecha:</label>
+                    <input type="date" id="fecha-evento" name="fecha-evento" required>
+
+                    <label for="hora-evento">Hora:</label>
+                    <select id="hora-evento" name="hora-evento">
+                        <option value="">--Selecciona la hora--</option>
+                    </select>
+
+                    <div class="buttons">
+                        <button type="button" id="reset">Restablecer</button>
+                        <button type="button" id="send-order">Confirmar Cotización</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>   
 </body>
 </html>

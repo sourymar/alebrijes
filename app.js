@@ -22,9 +22,10 @@ const productos = [
     { id: 19, nombre: "Mesa infantil con 4 sillas", precio: 100, imagen: "mesita4.png" },
     { id: 20, nombre: "Mesa infantil con 6 sillas", precio: 120, imagen: "mesita6.png" },
     { id: 21, nombre: "Silla infantil varios colores", precio: 10, imagen: "silla_infantil.jpeg" },
-    { id: 22, nombre: "Caballete infantil doble (incluye 2 sillas, 10 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" },
-    { id: 23, nombre: "Paquete fiesta 1 (incluye toldo, 3 mesas rectangulares, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2000, imagen: "paquete_fiesta1.png" },
-    { id: 24, nombre: "Paquete fiesta 2 (incluye toldo, 3 mesas redondas, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2300, imagen: "paquete_fiesta1.png" }
+    { id: 22, nombre: "Hockey infantil", precio: 200, imagen: "hockey.jpeg" },
+    { id: 23, nombre: "Caballete infantil doble (incluye 2 sillas, 10 dibujos, 2 acuarelas, 2 pinceles)", precio: 250, imagen: "caballete.jpeg" },
+    { id: 24, nombre: "Paquete fiesta 1 (incluye toldo, 3 mesas rectangulares, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2000, imagen: "paquete_fiesta1.png" },
+    { id: 25, nombre: "Paquete fiesta 2 (incluye toldo, 3 mesas redondas, 3 manteles, 30 sillas, 1 bocina, 1 asador, 1 hielera)", precio: 2300, imagen: "paquete_fiesta1.png" }
 ];
 
 const municipios = {
