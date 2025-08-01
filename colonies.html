@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colonias de Guadalajara y Zapopan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seleccionar Ciudad y Colonia</h1>
+    
+    <div class="form-group">
+        <label for="ciudad">Ciudad:</label>
+        <select id="ciudad" onchange="loadColonies()">
+            <option value="">--Selecciona una ciudad--</option>
+            <option value="guadalajara">Guadalajara</option>
+            <option value="zapopan">Zapopan</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="colonia">Colonia:</label>
+        <select id="colonia" disabled>
+            <option value="">--Primero selecciona una ciudad--</option>
+        </select>
+    </div>
+
+    <script>
+        const colonies = {
+            guadalajara: [
+                "Centro", "Americana", "Providencia", "Del Valle", "Chapalita",
+                "Jardines del Bosque", "Colinas de San Javier", "Santa Teresita",
+                "Arcos Vallarta", "Monraz", "Lafayette", "Vallarta Norte",
+                "Vallarta Poniente", "Jardines de Guadalupe", "Oblatos",
+                "San Juan de Dios", "Analco", "El Retiro", "Mezquitán Country",
+                "Country Club", "Lomas del Valle", "Jardines del Country",
+                "Residencial Victoria", "Lomas de Guadalupe", "Jardines de la Cruz"
+            ],
+            zapopan: [
+                "Zapopan Centro", "Tesistán", "La Calma", "El Colli", "Tabachines",
+                "Real de Tesistán", "Lomas de Zapopan", "Chapalita", "Ciudad Granja",
+                "Constitución", "Francisco Silva Romero", "Jardines de Nuevo México",
+                "Loma Bonita Ejidal", "Mesa Colorada", "Nextipac", "Olímpica",
+                "Pinar de la Calma", "Rinconada del Sol", "San Juan de Ocotán",
+                "Santa Margarita", "Villas de Guadalupe", "Arroyo Hondo",
+                "Belenes", "El Tigre", "Jardines del Valle"
+            ]
+        };
+
+        function loadColonies() {
+            const ciudadSelect = document.getElementById('ciudad');
+            const coloniaSelect = document.getElementById('colonia');
+            const selectedCity = ciudadSelect.value;
+
+            coloniaSelect.innerHTML = '<option value="">--Selecciona una colonia--</option>';
+
+            if (selectedCity && colonies[selectedCity]) {
+                coloniaSelect.disabled = false;
+                colonies[selectedCity].forEach(colony => {
+                    const option = document.createElement('option');
+                    option.value = colony.toLowerCase().replace(/\s+/g, '-');
+                    option.textContent = colony;
+                    coloniaSelect.appendChild(option);
+                });
+            } else {
+                coloniaSelect.disabled = true;
+                coloniaSelect.innerHTML = '<option value="">--Primero selecciona una ciudad--</option>';
+            }
+        }
+    </script>
+</body>
+</html>
