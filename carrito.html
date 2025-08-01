@@ -238,18 +238,22 @@
 <body>
     <div class="container">
         <header>
-            <h1><img src="logo.png" alt="Logo de Alebrijes" style="width:80px;height:80px;vertical-align:middle;margin-right:15px;">Alebrijes Diversión Total</h1>
-            <p>Renta de Mobiliario para Eventos</p>
+            <h1><img src="logo.png" alt="Logo de Alebrijes" style="width:120px;height:120px;vertical-align:middle;margin-right:15px;">Alebrijes Diversión Total</h1>
+            <p>COTIZADOR - Renta de Mobiliario</p>
         </header>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('mobiliario')">MOBILIARIO</button>
+            <button class="tab active" onclick="showTab('paquetes')">PAQUETES</button>
+            <button class="tab" onclick="showTab('mobiliario')">MOBILIARIO</button>
             <button class="tab" onclick="showTab('toldos')">TOLDOS</button>
             <button class="tab" onclick="showTab('infantiles')">INFANTILES</button>
-            <button class="tab" onclick="showTab('paquetes')">PAQUETES</button>
         </div>
 
-        <div id="mobiliario" class="tab-content active">
+        <div id="paquetes" class="tab-content active">
+            <div class="products-grid" id="paquetes-products"></div>
+        </div>
+
+        <div id="mobiliario" class="tab-content">
             <div class="products-grid" id="mobiliario-products"></div>
         </div>
 
@@ -259,10 +263,6 @@
 
         <div id="infantiles" class="tab-content">
             <div class="products-grid" id="infantiles-products"></div>
-        </div>
-
-        <div id="paquetes" class="tab-content">
-            <div class="products-grid" id="paquetes-products"></div>
         </div>
 
         <div class="flete-section">
@@ -279,9 +279,8 @@
             </div>
             <div class="form-group">
                 <label for="colonia">Colonia:</label>
-                <select id="colonia" disabled onchange="selectColony()">
-                    <option value="">--Primero selecciona un municipio--</option>
-                </select>
+                <input list="colonias" id="colonia" disabled placeholder="--Primero selecciona un municipio--" oninput="filterColonies()" onchange="selectColony()">
+                <datalist id="colonias"></datalist>
             </div>
         </div>
 
@@ -314,17 +313,17 @@
         const products = {
             mobiliario: [
                 {name: "Silla cromada acojinada", price: 15},
-                {name: "Mesa 2.40 con mantel", price: 140},
-                {name: "Mesa 1.80 con mantel", price: 140},
-                {name: "Mantel rectangular negro", price: 70},
-                {name: "Mantel rectangular blanco", price: 70},
-                {name: "Mantel redondo negro", price: 100},
-                {name: "Mantel redondo blanco", price: 100},
                 {name: "Mesa 2.40", price: 100},
                 {name: "Mesa 1.80", price: 90},
                 {name: "Mesa 1.20", price: 80},
+                {name: "Mantel rectangular blanco", price: 70},
+                {name: "Mantel rectangular negro", price: 70},
+                {name: "Mantel redondo blanco", price: 100},
+                {name: "Mantel redondo negro", price: 100},
                 {name: "Bocina JBL", price: 500},
-                {name: "Bocina con micrófono", price: 600}
+                {name: "Bocina con micrófono", price: 600},
+                {name: "Asador", price: 300},
+                {name: "Hielera 90 lts", price: 300}
             ],
             toldos: [
                 {name: "Toldo 6x3", price: 650},
@@ -332,12 +331,15 @@
                 {name: "Toldo 2x2", price: 200}
             ],
             infantiles: [
-                {name: "Mesa para 6", price: 130},
-                {name: "Mesa para 4", price: 110},
-                {name: "Silla infantil", price: 13}
+                {name: "Mesita con 6 sillitas", price: 130},
+                {name: "Mesita con 4 sillitas", price: 110},
+                {name: "Silla infantil varios colores", price: 13},
+                {name: "Caballete infantil con accesorios", price: 250},
+                {name: "Mesa de hockey infantil", price: 250}
             ],
             paquetes: [
-                {name: "Mesa con 10 sillas", price: 200},
+                {name: "Mesa rectangular con 10 sillas", price: 200},
+                {name: "Mesa redonda con 10 sillas", price: 250},
                 {name: "Toldo 6x3 con 2 mesas y 20 sillas", price: 950},
                 {name: "Toldo 6x3 con 3 mesas y 30 sillas", price: 1100}
             ]
@@ -345,30 +347,158 @@
 
         const colonies = {
             guadalajara: [
-                {name: "Centro", price: 100},
+                {name: "5 de Mayo", price: 50},
+                {name: "Agua Blanca", price: 100},
+                {name: "Alcalde Barranquitas", price: 50},
                 {name: "Americana", price: 150},
-                {name: "Providencia", price: 100},
+                {name: "Analco", price: 100},
+                {name: "Arcos Sur", price: 100},
+                {name: "Arcos Vallarta", price: 100},
+                {name: "Artesanos", price: 50},
+                {name: "Atlas", price: 50},
+                {name: "Atemajac del Valle", price: 100},
+                {name: "Balcones de Oblatos", price: 100},
+                {name: "Barrera", price: 50},
+                {name: "Belisario Domínguez", price: 50},
+                {name: "Benito Juárez", price: 50},
+                {name: "Bosques de la Victoria", price: 150},
+                {name: "Centro", price: 100},
+                {name: "Chapalita", price: 100},
+                {name: "Chapultepec Country", price: 150},
+                {name: "Chapultepec Norte", price: 100},
+                {name: "Chapultepec Sur", price: 100},
+                {name: "Ciudad del Sol", price: 150},
+                {name: "Colinas de San Javier", price: 150},
+                {name: "Country Club", price: 150},
+                {name: "Del Fresno", price: 100},
                 {name: "Del Valle", price: 50},
-                {name: "Chapalita", price: 100}
+                {name: "Doctores", price: 50},
+                {name: "El Retiro", price: 150},
+                {name: "Ferrocarril", price: 50},
+                {name: "Fray Antonio Alcalde", price: 50},
+                {name: "Guadalupe Inn", price: 100},
+                {name: "Hidalgo", price: 50},
+                {name: "Independencia", price: 50},
+                {name: "Jardines de Guadalupe", price: 50},
+                {name: "Jardines de la Cruz", price: 100},
+                {name: "Jardines de los Arcos", price: 100},
+                {name: "Jardines del Bosque", price: 100},
+                {name: "Jardines del Country", price: 150},
+                {name: "Ladron de Guevara", price: 100},
+                {name: "Lafayette", price: 100},
+                {name: "Las Conchas", price: 100},
+                {name: "Lomas de Guadalupe", price: 100},
+                {name: "Lomas de Polanco", price: 150},
+                {name: "Lomas del Valle", price: 150},
+                {name: "Mezquitán Country", price: 150},
+                {name: "Minerva", price: 100},
+                {name: "Mirador del Sol", price: 150},
+                {name: "Moderna", price: 100},
+                {name: "Monraz", price: 150},
+                {name: "Oblatos", price: 50},
+                {name: "Olivos", price: 100},
+                {name: "Parques del Auditorio", price: 100},
+                {name: "Polanco", price: 150},
+                {name: "Providencia", price: 100},
+                {name: "Reforma", price: 100},
+                {name: "Residencial Victoria", price: 150},
+                {name: "San Juan de Dios", price: 100},
+                {name: "Santa Teresita", price: 100},
+                {name: "Tetlán", price: 50},
+                {name: "Vallarta Norte", price: 100},
+                {name: "Vallarta Poniente", price: 100},
+                {name: "Zona Rosa", price: 100}
             ],
             zapopan: [
-                {name: "Zapopan Centro", price: 100},
-                {name: "Tesistán", price: 150},
-                {name: "La Calma", price: 100},
+                {name: "Andares", price: 150},
+                {name: "Arroyo Hondo", price: 150},
+                {name: "Belenes", price: 100},
+                {name: "Chapalita Inn", price: 100},
+                {name: "Ciudad Granja", price: 100},
+                {name: "Constitución", price: 100},
                 {name: "El Colli", price: 150},
-                {name: "Tabachines", price: 50}
+                {name: "El Tigre", price: 150},
+                {name: "Francisco Silva Romero", price: 50},
+                {name: "Jardines de Nuevo México", price: 100},
+                {name: "Jardines del Valle", price: 100},
+                {name: "La Calma", price: 100},
+                {name: "Loma Bonita Ejidal", price: 150},
+                {name: "Lomas de Zapopan", price: 150},
+                {name: "Mesa Colorada", price: 150},
+                {name: "Nextipac", price: 150},
+                {name: "Olímpica", price: 100},
+                {name: "Patria", price: 100},
+                {name: "Pinar de la Calma", price: 100},
+                {name: "Plaza del Sol", price: 100},
+                {name: "Puerta de Hierro", price: 150},
+                {name: "Real de Tesistán", price: 150},
+                {name: "Rinconada del Sol", price: 150},
+                {name: "San Juan de Ocotán", price: 150},
+                {name: "Santa Margarita", price: 100},
+                {name: "Tabachines", price: 50},
+                {name: "Tesistán", price: 150},
+                {name: "Valle de los Molinos", price: 100},
+                {name: "Villas de Guadalupe", price: 50},
+                {name: "Zapopan Centro", price: 100}
             ],
             tlaquepaque: [
+                {name: "Artesanos", price: 50},
+                {name: "Buenos Aires", price: 50},
                 {name: "Centro Tlaquepaque", price: 100},
-                {name: "San Pedrito", price: 150},
+                {name: "Cerro del Cuatro", price: 150},
+                {name: "El Árbol", price: 100},
+                {name: "El Refugio", price: 100},
+                {name: "El Tapatío", price: 100},
+                {name: "El Vergel", price: 100},
+                {name: "Jardines de la Paz", price: 100},
+                {name: "Jardines del Edén", price: 100},
+                {name: "La Experiencia", price: 100},
                 {name: "La Madrugada", price: 100},
-                {name: "Buenos Aires", price: 50}
+                {name: "Loma Dorada", price: 150},
+                {name: "Lomas de Tlaquepaque", price: 150},
+                {name: "Lomas del Paraíso", price: 150},
+                {name: "Miravalle", price: 100},
+                {name: "Parques de la Victoria", price: 150},
+                {name: "Paseos del Sol", price: 100},
+                {name: "Prados Tepeyac", price: 100},
+                {name: "Rancho Alegre", price: 100},
+                {name: "San Pedrito", price: 150},
+                {name: "Santa Anita", price: 50},
+                {name: "Toluquilla", price: 100},
+                {name: "Villas de Oriente", price: 100},
+                {name: "Zalatitán", price: 150}
             ],
             tlajomulco: [
                 {name: "Centro Tlajomulco", price: 150},
+                {name: "Chulavista", price: 150},
                 {name: "Haciendas de Tlajomulco", price: 100},
+                {name: "Jardines de la Calera", price: 100},
+                {name: "Jardines de la Montaña", price: 150},
+                {name: "Jardines de San Sebastián", price: 100},
+                {name: "Jardines de Tlajomulco", price: 100},
+                {name: "Jardines del Valle", price: 100},
+                {name: "Lomas de Chapultepec", price: 150},
+                {name: "Lomas de la Primavera", price: 150},
+                {name: "Lomas de Santa Anita", price: 150},
                 {name: "Lomas de Tlajomulco", price: 150},
-                {name: "Valle Real", price: 100}
+                {name: "Lomas del Bosque", price: 150},
+                {name: "Lomas del Sur", price: 150},
+                {name: "Parques de la Hacienda", price: 100},
+                {name: "Parques del Castillo", price: 150},
+                {name: "Paseos de la Hacienda", price: 100},
+                {name: "Paseos del Marques", price: 150},
+                {name: "Residencial Campestre", price: 150},
+                {name: "Residencial Esmeralda", price: 150},
+                {name: "Residencial Poniente", price: 150},
+                {name: "Rinconadas del Mirador", price: 150},
+                {name: "Valle Real", price: 100},
+                {name: "Villa California", price: 100},
+                {name: "Villa Coral", price: 100},
+                {name: "Villa Fontana", price: 100},
+                {name: "Villas de Ixtapa", price: 100},
+                {name: "Villas de San José", price: 100},
+                {name: "Villas del Campo", price: 100},
+                {name: "Villas del Pedregal", price: 150}
             ]
         };
 
@@ -387,9 +517,51 @@
         function createProductCard(product, category) {
             const productId = `${category}-${product.name.replace(/\s+/g, '-').toLowerCase()}`;
             
+            // Determinar la imagen según el producto
+            let imageSrc = '';
+            if (product.name === 'Mesa rectangular con 10 sillas') {
+                imageSrc = '<img src="mesa_con_10_sillas.png" alt="Mesa rectangular con 10 sillas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3 con 3 mesas y 30 sillas') {
+                imageSrc = '<img src="toldo_con_3_mesas.jpeg" alt="Toldo con 3 mesas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Silla cromada acojinada') {
+                imageSrc = '<img src="silla_acojinada.png" alt="Silla cromada acojinada" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa redonda con 10 sillas') {
+                imageSrc = '<img src="mesa_redonda.jpg" alt="Mesa redonda con 10 sillas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3') {
+                imageSrc = '<img src="toldo_6x3.png" alt="Toldo 6x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesita con 6 sillitas') {
+                imageSrc = '<img src="mesita6.png" alt="Mesita con 6 sillitas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesita con 4 sillitas') {
+                imageSrc = '<img src="mesita4.png" alt="Mesita con 4 sillitas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Silla infantil varios colores') {
+                imageSrc = '<img src="silla_infantil.jpeg" alt="Silla infantil varios colores" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel rectangular blanco') {
+                imageSrc = '<img src="mantel_rect_blanco.png" alt="Mantel rectangular blanco" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel rectangular negro') {
+                imageSrc = '<img src="mantel_rect_negro.png" alt="Mantel rectangular negro" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel redondo blanco') {
+                imageSrc = '<img src="mantel_redondo_blanco.png" alt="Mantel redondo blanco" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel redondo negro') {
+                imageSrc = '<img src="mantel_redondo_negro.png" alt="Mantel redondo negro" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Hielera 90 lts') {
+                imageSrc = '<img src="hielera.jpg" alt="Hielera 90 lts" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 2.40') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 2.40" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 1.80') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 1.80" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 1.20') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 1.20" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Caballete infantil con accesorios') {
+                imageSrc = '<img src="caballete.jpeg" alt="Caballete infantil con accesorios" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa de hockey infantil') {
+                imageSrc = '<img src="hockey.jpeg" alt="Mesa de hockey infantil" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else {
+                imageSrc = '📦 Imagen';
+            }
+            
             return `
                 <div class="product-card">
-                    <div class="product-image">📦 Imagen</div>
+                    <div class="product-image">${imageSrc}</div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-price">$${product.price}</div>
                     <div class="quantity-section">
@@ -427,38 +599,86 @@
             updateOrderSummary();
         }
 
+        let currentMunicipio = '';
+        
         function loadColonies() {
             const municipio = document.getElementById('municipio').value;
-            const coloniaSelect = document.getElementById('colonia');
+            const coloniaInput = document.getElementById('colonia');
+            const coloniasList = document.getElementById('colonias');
             
-            coloniaSelect.innerHTML = '<option value="">--Selecciona una colonia--</option>';
+            currentMunicipio = municipio;
+            coloniasList.innerHTML = '';
+            coloniaInput.value = '';
             
             if (municipio && colonies[municipio]) {
-                coloniaSelect.disabled = false;
+                coloniaInput.disabled = false;
+                coloniaInput.placeholder = 'Escribe o selecciona una colonia';
                 colonies[municipio].forEach(colony => {
                     const option = document.createElement('option');
-                    option.value = JSON.stringify(colony);
-                    option.textContent = `${colony.name} - $${colony.price}`;
-                    coloniaSelect.appendChild(option);
+                    option.value = `${colony.name} - $${colony.price}`;
+                    option.setAttribute('data-colony', JSON.stringify(colony));
+                    coloniasList.appendChild(option);
                 });
             } else {
-                coloniaSelect.disabled = true;
+                coloniaInput.disabled = true;
+                coloniaInput.placeholder = '--Primero selecciona un municipio--';
                 fletePrice = 0;
                 selectedColony = '';
                 updateOrderSummary();
             }
         }
+        
+        function filterColonies() {
+            const input = document.getElementById('colonia').value.toLowerCase();
+            const coloniasList = document.getElementById('colonias');
+            
+            if (!currentMunicipio || !colonies[currentMunicipio]) return;
+            
+            coloniasList.innerHTML = '';
+            
+            const filtered = colonies[currentMunicipio].filter(colony => 
+                colony.name.toLowerCase().includes(input)
+            );
+            
+            filtered.forEach(colony => {
+                const option = document.createElement('option');
+                option.value = `${colony.name} - $${colony.price}`;
+                option.setAttribute('data-colony', JSON.stringify(colony));
+                coloniasList.appendChild(option);
+            });
+        }
 
         function selectColony() {
-            const colonyData = document.getElementById('colonia').value;
-            if (colonyData) {
-                const colony = JSON.parse(colonyData);
-                fletePrice = colony.price;
-                selectedColony = colony.name;
+            const coloniaInput = document.getElementById('colonia');
+            const coloniasList = document.getElementById('colonias');
+            const inputValue = coloniaInput.value;
+            
+            // Buscar en las opciones del datalist
+            const options = coloniasList.querySelectorAll('option');
+            let foundColony = null;
+            
+            for (let option of options) {
+                if (option.value === inputValue) {
+                    foundColony = JSON.parse(option.getAttribute('data-colony'));
+                    break;
+                }
+            }
+            
+            // También buscar por coincidencia exacta del nombre
+            if (!foundColony && currentMunicipio && colonies[currentMunicipio]) {
+                foundColony = colonies[currentMunicipio].find(colony => 
+                    inputValue.toLowerCase().includes(colony.name.toLowerCase())
+                );
+            }
+            
+            if (foundColony) {
+                fletePrice = foundColony.price;
+                selectedColony = foundColony.name;
             } else {
                 fletePrice = 0;
                 selectedColony = '';
             }
+            
             updateOrderSummary();
         }
 
@@ -495,8 +715,10 @@
             document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
             document.querySelectorAll('[id$="-total"]').forEach(total => total.textContent = 'Importe: $0');
             document.getElementById('municipio').value = '';
-            document.getElementById('colonia').innerHTML = '<option value="">--Primero selecciona un municipio--</option>';
+            document.getElementById('colonia').value = '';
+            document.getElementById('colonia').placeholder = '--Primero selecciona un municipio--';
             document.getElementById('colonia').disabled = true;
+            document.getElementById('colonias').innerHTML = '';
             
             updateOrderSummary();
         }
