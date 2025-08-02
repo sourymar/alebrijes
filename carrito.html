@@ -15,7 +15,16 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -215,6 +224,20 @@
             transform: translateY(-2px);
         }
 
+        /* Image Protection */
+        img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+
         @media (max-width: 768px) {
             .tabs {
                 flex-direction: column;
@@ -300,6 +323,32 @@
             <div class="total-section">
                 <div id="flete-info">Flete: $0</div>
                 <div class="total-amount" id="total-amount">Total: $0</div>
+            </div>
+        </div>
+
+        <div class="flete-section">
+            <h2>📅 Datos del Evento</h2>
+            <div class="form-group">
+                <label for="organizador">Nombre del organizador:</label>
+                <input type="text" id="organizador" placeholder="Ingresa el nombre del organizador">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="Ingresa el teléfono de contacto">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" placeholder="Ingresa la dirección del evento">
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha del evento:</label>
+                <input type="date" id="fecha">
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora del evento:</label>
+                <select id="hora">
+                    <option value="">--Selecciona una hora--</option>
+                </select>
             </div>
         </div>
 
@@ -529,6 +578,12 @@
                 imageSrc = '<img src="mesa_redonda.jpg" alt="Mesa redonda con 10 sillas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
             } else if (product.name === 'Toldo 6x3') {
                 imageSrc = '<img src="toldo_6x3.png" alt="Toldo 6x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3 con 2 mesas y 20 sillas') {
+                imageSrc = '<img src="Toldo con 2 mesas blanco.jpeg" alt="Toldo con 2 mesas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 2x2') {
+                imageSrc = '<img src="Toldo_2x2.jpeg" alt="Toldo 2x2" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 3x3') {
+                imageSrc = '<img src="Toldo_3x3.jpeg" alt="Toldo 3x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
             } else if (product.name === 'Mesita con 6 sillitas') {
                 imageSrc = '<img src="mesita6.png" alt="Mesita con 6 sillitas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
             } else if (product.name === 'Mesita con 4 sillitas') {
@@ -555,6 +610,10 @@
                 imageSrc = '<img src="caballete.jpeg" alt="Caballete infantil con accesorios" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
             } else if (product.name === 'Mesa de hockey infantil') {
                 imageSrc = '<img src="hockey.jpeg" alt="Mesa de hockey infantil" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Bocina JBL') {
+                imageSrc = '<img src="bocina jbl.png" alt="Bocina JBL" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Asador') {
+                imageSrc = '<img src="asador.jpeg" alt="Asador" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
             } else {
                 imageSrc = '📦 Imagen';
             }
@@ -720,15 +779,39 @@
             document.getElementById('colonia').disabled = true;
             document.getElementById('colonias').innerHTML = '';
             
+            // Reset event data
+            document.getElementById('organizador').value = '';
+            document.getElementById('telefono').value = '';
+            document.getElementById('direccion').value = '';
+            document.getElementById('fecha').value = '';
+            document.getElementById('hora').value = '';
+            
             updateOrderSummary();
         }
 
         function sendWhatsApp() {
-            let message = "🎪 *COTIZACIÓN ALEBRIJES DIVERSIÓN TOTAL*\n\n";
+            let message = "📋 *Hola, necesito confirmar disponibilidad para la siguiente cotizacion:*\n\n";
             
             if (Object.keys(cart).length === 0) {
                 alert('Por favor selecciona al menos un producto');
                 return;
+            }
+            
+            // Datos del evento
+            const organizador = document.getElementById('organizador').value;
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            
+            if (organizador || telefono || direccion || fecha || hora) {
+                message += "📅 *DATOS DEL EVENTO:*\n";
+                if (organizador) message += `• Organizador: ${organizador}\n`;
+                if (telefono) message += `• Teléfono: ${telefono}\n`;
+                if (direccion) message += `• Dirección: ${direccion}\n`;
+                if (fecha) message += `• Fecha: ${fecha}\n`;
+                if (hora) message += `• Hora: ${hora}\n`;
+                message += "\n";
             }
             
             message += "📦 *PRODUCTOS:*\n";
@@ -741,14 +824,81 @@
             
             message += `\n🚚 *FLETE:* ${selectedColony || 'No seleccionado'} - $${fletePrice}\n`;
             message += `\n💰 *TOTAL: $${subtotal + fletePrice}*\n\n`;
-            message += "¡Gracias por tu preferencia! 🎉";
+            message += "¡Gracias! 🎉";
             
             const whatsappUrl = `https://wa.me/523314423619?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
+        // Generar horarios
+        function generateTimeOptions() {
+            const horaSelect = document.getElementById('hora');
+            let hour = 8;
+            let minute = 0;
+            
+            while (hour < 20 || (hour === 20 && minute <= 30)) {
+                const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                const option = document.createElement('option');
+                option.value = timeString;
+                option.textContent = timeString;
+                horaSelect.appendChild(option);
+                
+                minute += 30;
+                if (minute >= 60) {
+                    minute = 0;
+                    hour++;
+                }
+            }
+        }
+
+        // Establecer fecha mínima como hoy
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').min = today;
+        }
+
+        // Handle tab switching from URL hash
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['paquetes', 'mobiliario', 'toldos', 'infantiles'].includes(hash)) {
+                showTabByName(hash);
+            }
+        }
+
+        function showTabByName(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            const targetTab = Array.from(document.querySelectorAll('.tab')).find(tab => 
+                tab.textContent.toLowerCase().includes(tabName === 'infantiles' ? 'infantiles' : tabName)
+            );
+            if (targetTab) targetTab.classList.add('active');
+            
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) targetContent.classList.add('active');
+        }
+
         // Inicializar la página
         loadProducts();
+        generateTimeOptions();
+        setMinDate();
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Image protection
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>

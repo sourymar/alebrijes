@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <theme>standard</theme>
+        <encoding>UTF-8</encoding>
+        <protocol>https</protocol>
+        <titlePageName>Alebrijes Test Report</titlePageName>
+        <documentTitle>Carrito Automation Tests</documentTitle>
+        <reportName>Test Execution Report</reportName>
+        <timeStampFormat>MMM dd, yyyy HH:mm:ss</timeStampFormat>
+        <css>
+            .test-name { font-weight: bold; }
+            .test-status { text-transform: uppercase; }
+        </css>
+        <js>
+            var statusMark = document.querySelector('.status-mark');
+            if (statusMark) statusMark.style.display = 'none';
+        </js>
+    </configuration>
+</extentreports>

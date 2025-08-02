@@ -3,113 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alebrijes - Cotizador de mobiliario</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="app.js"></script>
+    <title>Alebrijes Diversión Total - Renta de Mobiliario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Toldo con 2 mesas.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 5%;
+            text-align: left;
+            color: white;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #fff;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .about-image {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Foto2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 400px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: #667eea;
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Image Protection */
+        img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="Logo de Alebrijes" style="width:100px;height:100px">
-                <h1>COTIZADOR - Renta de mobiliario</h1>  
-        </header>
-        <main>
-            <section id="terms-section">
-                <button class="collapsible">
-                <h3>Terminos y Condiciones del Servicio</h3></button>
-                <div id="terms-content" style="display: none;">
-                    <div class="content">
-                        <p>El pedido esta sujeto a disponibilidad de los artículos en nuestro inventario. 
-                            <br>Servicio de Lunes a Domingo.</p>
-                        <p></p>
-                        <p>Politicas de Renta:
-                            <br>1. La cotización del pedido se confirmará via WhatsApp, una vez confirmado se agendará con los datos del evento.
-                            <br>2. El pago del mobiliario es a la entrega del mismo en efectivo o con el metodo de pago acordado al agendar.
-                            <br>3. La renta es por el día y el mobiliario se recoge al siguiente día en el transcurso de la mañana a partir de las 10:00 a.m. o el mismo día al termino del evento en caso de ser necesario.
-                            <br>4. El cliente es responsable de cualquier daño ocasionado al mobiliario por uso de CERA, PINTURA, PEGAMENTO.
-                            <br>5. En caso de daño al mobiliario el cliente tendrá que cubrir el costo de reposición correspondiente al artículo dañado.</p>
-                        <p>Condiciones Generales:
-                            <br>1. Cambios de precios: Todos los precios están sujetos a cambios sin previo aviso por lo que se sugiere confirmar los datos de la cotización por WhatsApp.
-                            <br>2. Pedidos: Para realizar cualquier pedido es necesario enviar los datos al WhatsApp 3314423619, una vez recibidos se confirman los datos e importes y se agenda para entrega con horario tentativo.
-                            <br>3. Disponibilidad: Todos los artículos se encuentran sujetos a disponibilidad, no se garantiza la existencia de los productos al ser solicitados el mismo día o un día antes.
-                            <br>4. Formas de pago: 
-                            <br>---Efectivo 
-                            <br>---Transferencia se tendrá que pagar 16% adicional por concepto de IVA
-                            <br>---Tarjeta de credito o debito se tendrá que pagar 16% adicional por concepto de IVA más un una comisión del 5%
-                            <br>5. Facturación: Se tendrá que pagar 16% adicional por concepto de IVA. En caso de requerir factura deberá solicitarla al agendar y hacer llegar sus datos completos por WhatsApp o al correo alebrijesdt@gmail.com en el mismo mes de pago, no se facturará en otro mes o después de enviado el mobiliario.
-                        </p>
-                    </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo Alebrijes">
+                Alebrijes Diversión Total
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=61563371751931" target="_blank"><img src="logo facebook.png" alt="Facebook" style="width: 24px; height: 24px;"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Crea momentos inolvidables<br>con Alebrijes Diversión Total</h1>
+            <p>Renta de mobiliario para eventos sociales en Guadalajara y zona metropolitana.<br>
+            Calidad, flexibilidad y atención personalizada para tu celebración perfecta.</p>
+            <a href="carrito.html" class="cta-button">💰 COTIZAR AHORA</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <a href="carrito.html#paquetes" class="service-card" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="service-icon"><img src="mesa_con_10_sillas.png" alt="Mesa con sillas" style="width: 80px; height: 80px; object-fit: contain;"></div>
+                    <h3>Paquetes</h3>
+                    <p>Paquetes todo incluido para tus eventos con mesas, sillas y accesorios</p>
+                </a>
+                <a href="carrito.html#mobiliario" class="service-card" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="service-icon"><img src="silla.jpg" alt="Silla" style="width: 80px; height: 80px; object-fit: contain;"></div>
+                    <h3>Mobiliario</h3>
+                    <p>Amplia variedad de sillas, mesas y mobiliario para cualquier ocasión</p>
+                </a>
+                <a href="carrito.html#toldos" class="service-card" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="service-icon"><img src="toldo_6x3.png" alt="Toldo" style="width: 80px; height: 80px; object-fit: contain;"></div>
+                    <h3>Toldos</h3>
+                    <p>Protección y comodidad con nuestros toldos de diferentes tamaños</p>
+                </a>
+                <a href="carrito.html#infantiles" class="service-card" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="service-icon"><img src="mesita4.png" alt="Mesa infantil" style="width: 80px; height: 80px; object-fit: contain;"></div>
+                    <h3>Mobiliario Infantil</h3>
+                    <p>Muebles especiales para los más pequeños de la casa</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>¿Quiénes Somos?</h2>
+                    <p>En Alebrijes Diversión Total nos especializamos en la renta de mobiliario para todo tipo de eventos sociales. Ofrecemos sillas, mesas, manteles, toldos, bocinas, asadores y mobiliario infantil con un enfoque en calidad, puntualidad y atención personalizada.<br>Nuestra misión es que cada evento se realice con éxito.</p>
+                    <p>Atendemos toda la zona metropolitana de Guadalajara con entregas puntuales y precios competitivos.</p>
+                    <a href="carrito.html" class="cta-button" style="color: #667eea;">Ver Catálogo</a>
                 </div>
-            </section>
-
-            <section id="products">
-                <h2>Bienvenid@, selecciona el mobiliario:</h2>
-                <div id="product-list" class="product-list">
-                
+                <div class="about-image">
+                    <p>🎉 Hacemos que tu evento sea una realidad 🎉</p>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <section id="flete">
-                <h2>Flete</h2>
-                <form id="flete-form">
-                    <label for="municipio">Selecciona un municipio:</label>
-                    <select id="municipio" name="municipio">
-                        <option value="">--Selecciona un municipio--</option>
-                    </select>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contáctanos</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>💬</span>
+                    <span>WhatsApp: 33-1442-3619</span>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>alebrijesdt@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Zapopan, Jalisco</span>
+                </div>
+            </div>
+            <a href="carrito.html" class="cta-button">🛒 Solicitar Cotización</a>
+        </div>
+    </section>
 
-                    <label for="colonia">Selecciona o escribe una colonia:</label>
-                    <input list="colonias" id="colonia" name="colonia" placeholder="Colonia">
-                    <datalist id="colonias"></datalist>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Alebrijes Diversión Total. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-                    <p id="flete-label">Costo de Flete: $0</p>
-                </form>
-            </section>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-            <section id="resumen">
-                <h2>Datos de la Cotización</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Importe</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order-summary"></tbody>
-                </table>
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
 
-                <p id="resumen-flete">Municipio: - | Colonia: - | Flete: $0</p>
-                <p id="total-pagar">Total a Pagar: $0</p>
-            </section>
+        // Image protection
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
 
-            <section id="datos-pedido">
-                <h2>Datos del Evento</h2>
-                <form id="pedido-form">
-                    <label for="nombre">Nombre del organizador:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
-
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required>
-
-                    <label for="fecha-evento">Fecha:</label>
-                    <input type="date" id="fecha-evento" name="fecha-evento" required>
-
-                    <label for="hora-evento">Hora:</label>
-                    <select id="hora-evento" name="hora-evento">
-                        <option value="">--Selecciona la hora--</option>
-                    </select>
-
-                    <div class="buttons">
-                        <button type="button" id="reset">Restablecer</button>
-                        <button type="button" id="send-order">Confirmar Cotización</button>
-                    </div>
-                </form>
-            </section>
-        </main>
-    </div>   
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
