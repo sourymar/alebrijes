@@ -292,6 +292,12 @@
             pointer-events: none;
         }
 
+        /* Allow images inside service cards to be clickable (defensive) */
+        .service-card img {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -417,6 +423,24 @@
             <a href="carrito.html" class="cta-button">🛒 Solicitar Cotización</a>
         </div>
     </section>
+
+    <script>
+        // Defensive: ensure clicking a service-card navigates to its href
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.service-card').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    // If the click target is an interactive element, let it handle it
+                    var target = e.target;
+                    if (target && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest && target.closest('a'))) return;
+                    var a = card.closest('a');
+                    if (a && a.href) {
+                        // navigate using location (works across environments)
+                        window.location.href = a.getAttribute('href');
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Footer -->
     <footer>
