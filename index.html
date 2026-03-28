@@ -164,6 +164,25 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            position: relative; /* allow positioned children like ribbon */
+            overflow: hidden;
+        }
+
+        /* Diagonal "PROXIMAMENTE" ribbon for upcoming services */
+        .service-card .coming-soon {
+            position: absolute;
+            top: 12px;
+            left: -44px;
+            background: rgba(220,53,69,0.95); /* bootstrap danger-like color */
+            color: #fff;
+            padding: 6px 72px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transform: rotate(-45deg);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+            pointer-events: none;
+            letter-spacing: 1px;
         }
 
         .service-card:hover {
@@ -349,6 +368,12 @@
                     <div class="service-icon"><img src="mesita4.png" alt="Mesa infantil" style="width: 80px; height: 80px; object-fit: contain;"></div>
                     <h3>Mobiliario Infantil</h3>
                     <p>Muebles especiales para los más pequeños de la casa</p>
+                </a>
+                <a href="carrito.html#terraza" class="service-card" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="coming-soon">PROXIMAMENTE</div>
+                    <div class="service-icon"><img src="terraza.jpg" alt="Terraza para eventos" style="width: 80px; height: 80px; object-fit: contain;"></div>
+                    <h3>Terraza para eventos</h3>
+                    <p>Espacio al aire libre ideal para celebraciones y eventos con capacidad adaptable.</p>
                 </a>
             </div>
         </div>
