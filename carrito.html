@@ -913,7 +913,24 @@
         // Establecer fecha mínima como hoy
         function setMinDate() {
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha').min = today;
+            const fechaEl = document.getElementById('fecha');
+            if (!fechaEl) return;
+            fechaEl.min = today;
+
+            // Prevent selecting or entering past dates: enforce min on input/change
+            const enforceMin = () => {
+                try {
+                    if (!fechaEl.value) return;
+                    if (fechaEl.value < fechaEl.min) {
+                        fechaEl.value = fechaEl.min;
+                    }
+                } catch (err) {
+                    // ignore
+                }
+            };
+
+            fechaEl.addEventListener('change', enforceMin);
+            fechaEl.addEventListener('input', enforceMin);
         }
 
         // Video playback removed — playVideo function deleted per request
