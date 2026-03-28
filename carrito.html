@@ -685,7 +685,7 @@
                     <div class="quantity-section">
                         <label>Cantidad:</label>
                         <input type="number" class="quantity-input" id="${productId}" 
-                               min="0" max="100" value="0" 
+                               min="0" max="100" value="0"
                                onchange="updateCart('${productId}', '${product.name}', ${product.price})">
                     </div>
                     <div class="product-total" id="${productId}-total">Importe: $0</div>
@@ -941,6 +941,8 @@
 
         // Inicializar la página
         loadProducts();
+    // Attach quantity input handlers (clear on focus, numeric only, restore 0 on blur)
+    attachQuantityInputHandlers();
         generateTimeOptions();
         setMinDate();
         handleHashChange();
@@ -960,6 +962,37 @@
                 e.preventDefault();
             }
         });
+
+        // Attach handlers to quantity inputs: clear on focus, numeric-only input,
+        // and restore zero on blur (then trigger change to recalc cart)
+        function attachQuantityInputHandlers() {
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                // clear default zero on focus so user can type
+                input.addEventListener('focus', (e) => {
+                    try {
+                        if (e.target.value === '0') e.target.value = '';
+                    } catch (err) {}
+                });
+
+                // enforce numeric-only characters (digits) as user types
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    // allow only digits
+                    const cleaned = val.replace(/[^0-9]/g, '');
+                    if (cleaned !== val) e.target.value = cleaned;
+                });
+
+                // on blur, if empty set back to 0 and trigger change to update cart
+                input.addEventListener('blur', (e) => {
+                    const v = e.target.value;
+                    if (!v || v.toString().trim() === '') {
+                        e.target.value = '0';
+                    }
+                    // trigger change handler so totals update
+                    e.target.dispatchEvent(new Event('change'));
+                });
+            });
+        }
     </script>
 </body>
 </html>
