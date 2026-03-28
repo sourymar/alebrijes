@@ -258,16 +258,22 @@
             .buttons {
                 flex-direction: column;
             }
-            /* Keep order table on a single line per row on mobile: smaller font, no wrapping, ellipsis */
+            /* Keep order table on a single line per row on mobile: smaller font, no wrapping, ellipsis.
+               Add horizontal scroll fallback inside the resumen section so the row stays one line. */
+            .resumen-section {
+                overflow-x: auto; /* allow horizontal scroll if needed */
+            }
+
             .order-table {
                 width: 100%;
+                min-width: 320px; /* avoid collapsing too small */
                 table-layout: fixed; /* enforce column widths */
                 border-collapse: collapse;
             }
 
             .order-table th, .order-table td {
-                padding: 0.35rem 0.4rem;
-                font-size: 0.85rem; /* reduce font to fit */
+                padding: 0.25rem 0.35rem;
+                font-size: 0.78rem; /* reduce font to fit */
                 white-space: nowrap; /* keep content on one line */
                 overflow: hidden;
                 text-overflow: ellipsis; /* show ... when content is too long */
@@ -275,22 +281,22 @@
 
             /* Allocate widths so the product column gets more room but still fits */
             .order-table th:first-child, .order-table td:first-child {
-                width: 40%;
+                width: 50%;
                 text-align: left;
             }
 
             .order-table th:nth-child(2), .order-table td:nth-child(2) {
-                width: 20%;
+                width: 16.66%;
                 text-align: center;
             }
 
             .order-table th:nth-child(3), .order-table td:nth-child(3) {
-                width: 20%;
+                width: 16.66%;
                 text-align: right;
             }
 
             .order-table th:nth-child(4), .order-table td:nth-child(4) {
-                width: 20%;
+                width: 16.66%;
                 text-align: right;
             }
         }
