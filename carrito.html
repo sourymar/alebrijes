@@ -258,6 +258,41 @@
             .buttons {
                 flex-direction: column;
             }
+            /* Make order table more mobile-friendly: allow wrapping and reduce padding/font-size */
+            .order-table {
+                width: 100%;
+                table-layout: auto;
+                border-collapse: collapse;
+                overflow: hidden;
+            }
+
+            .order-table th, .order-table td {
+                padding: 0.5rem;
+                font-size: 0.95rem;
+                white-space: normal; /* allow wrapping */
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+
+            /* If product names are long, allow the first column to take remaining space */
+            .order-table th:first-child, .order-table td:first-child {
+                width: 55%;
+            }
+
+            .order-table th:nth-child(2), .order-table td:nth-child(2) {
+                width: 15%;
+                text-align: center;
+            }
+
+            .order-table th:nth-child(3), .order-table td:nth-child(3) {
+                width: 15%;
+                text-align: right;
+            }
+
+            .order-table th:nth-child(4), .order-table td:nth-child(4) {
+                width: 15%;
+                text-align: right;
+            }
         }
     </style>
 </head>
