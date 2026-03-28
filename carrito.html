@@ -42,6 +42,49 @@
             margin-bottom: 2rem;
         }
 
+        /* Terms section */
+        .terms-section {
+            margin-bottom: 1rem;
+        }
+
+        .terms-btn {
+            width: 100%;
+            text-align: left;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terms-btn:after {
+            content: '\25BC'; /* down arrow */
+            font-size: 1rem;
+            transition: transform 0.25s ease;
+        }
+
+        .terms-btn[aria-expanded="true"]:after {
+            transform: rotate(180deg);
+        }
+
+        .terms-content {
+            background: #fffef0;
+            border: 1px solid #ffeeba;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .terms-content.open {
+            display: block;
+        }
+
         .tabs {
             display: flex;
             background: white;
@@ -312,6 +355,38 @@
             </h1>
             <p>COTIZADOR - Renta de Mobiliario</p>
         </header>
+
+        <div class="terms-section">
+            <button class="terms-btn" aria-expanded="false" onclick="toggleTerms(this)">Términos y condiciones</button>
+            <div class="terms-content" id="termsContent" aria-hidden="true">
+                <p>El pedido esta sujeto a disponibilidad de los artículos en nuestro inventario.<br>
+                Servicio de Lunes a Domingo.</p>
+
+                <h4>Políticas de Renta:</h4>
+                <ol>
+                    <li>La cotización del pedido se confirmará via WhatsApp, una vez confirmado se agendará con los datos del evento.</li>
+                    <li>El pago del mobiliario es a la entrega del mismo en efectivo o con el metodo de pago acordado al agendar.</li>
+                    <li>La renta es por el día y el mobiliario se recoge al siguiente día en el transcurso de la mañana a partir de las 10:00 a.m. o el mismo día al termino del evento en caso de ser necesario.</li>
+                    <li>El cliente es responsable de cualquier daño ocasionado al mobiliario por uso de CERA, PINTURA, PEGAMENTO.</li>
+                    <li>En caso de daño al mobiliario el cliente tendrá que cubrir el costo de reposición correspondiente al artículo dañado.</li>
+                </ol>
+
+                <h4>Condiciones Generales:</h4>
+                <ol>
+                    <li>Cambios de precios: Todos los precios están sujetos a cambios sin previo aviso por lo que se sugiere confirmar los datos de la cotización por WhatsApp.</li>
+                    <li>Pedidos: Para realizar cualquier pedido es necesario enviar los datos al WhatsApp 3314423619, una vez recibidos se confirman los datos e importes y se agenda para entrega con horario tentativo.</li>
+                    <li>Disponibilidad: Todos los artículos se encuentran sujetos a disponibilidad, no se garantiza la existencia de los productos al ser solicitados el mismo día o un día antes.</li>
+                    <li>Formas de pago:
+                        <ul>
+                            <li>Efectivo</li>
+                            <li>Transferencia se tendrá que pagar 16% adicional por concepto de IVA</li>
+                            <li>Tarjeta de credito o debito se tendrá que pagar 16% adicional por concepto de IVA más un una comisión del 5%</li>
+                        </ul>
+                    </li>
+                    <li>Facturación: Se tendrá que pagar 16% adicional por concepto de IVA. En caso de requerir factura deberá solicitarla al agendar y hacer llegar sus datos completos por WhatsApp o al correo alebrijesdt@gmail.com en el mismo mes de pago, no se facturará en otro mes o después de enviado el mobiliario.</li>
+                </ol>
+            </div>
+        </div>
 
         <div class="tabs">
             <button class="tab active" onclick="showTab('paquetes')">PAQUETES</button>
@@ -958,8 +1033,9 @@
 
         // Inicializar la página
         loadProducts();
-    // Attach quantity input handlers (clear on focus, numeric only, restore 0 on blur)
+    // Attach quantity input handlers (clear on focus, numeric-only, restore 0 on blur)
     attachQuantityInputHandlers();
+    // Toggle terms handler defined below
         generateTimeOptions();
         setMinDate();
         handleHashChange();
@@ -1009,6 +1085,22 @@
                     e.target.dispatchEvent(new Event('change'));
                 });
             });
+        }
+
+        // Toggle the terms and conditions content
+        function toggleTerms(btn) {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            const content = document.getElementById('termsContent');
+            if (!content) return;
+            if (expanded) {
+                btn.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                content.setAttribute('aria-hidden', 'true');
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.classList.add('open');
+                content.setAttribute('aria-hidden', 'false');
+            }
         }
     </script>
 </body>
