@@ -165,24 +165,25 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
             position: relative; /* allow positioned children like ribbon */
-            overflow: hidden;
+            overflow: visible; /* allow ribbon to extend outside card so text isn't clipped */
         }
 
         /* Diagonal "PROXIMAMENTE" ribbon for upcoming services */
         .service-card .coming-soon {
             position: absolute;
-            top: 12px;
-            left: -44px;
+            top: 8px;
+            left: -20px;
             background: rgba(220,53,69,0.95); /* bootstrap danger-like color */
             color: #fff;
-            padding: 6px 72px;
+            padding: 6px 110px; /* wider padding so the rotated ribbon shows full text */
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             transform: rotate(-45deg);
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             z-index: 10;
             pointer-events: none;
             letter-spacing: 1px;
+            white-space: nowrap; /* ensure text doesn't wrap */
         }
 
         .service-card:hover {
@@ -370,10 +371,8 @@
                     <p>Muebles especiales para los más pequeños de la casa</p>
                 </a>
                 <a href="carrito.html#terraza" class="service-card" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="coming-soon">PROXIMAMENTE</div>
+                    <div class="coming-soon">Proximamente</div>
                     <div class="service-icon"><img src="terraza.jpg" alt="Terraza para eventos" style="width: 80px; height: 80px; object-fit: contain;"></div>
-                    <h3>Terraza para eventos</h3>
-                    <p>Espacio al aire libre ideal para celebraciones y eventos con capacidad adaptable.</p>
                 </a>
             </div>
         </div>
