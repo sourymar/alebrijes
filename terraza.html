@@ -173,10 +173,7 @@
             height: 100%; /* let grid row sizing control the card height */
         }
 
-        /* Ensure cards have a consistent minimum height so they align visually */
-        .product-card {
-            min-height: 480px; /* adjust as needed for desktop */
-        }
+        /* Cards will size to the Paquete Personalizado height via JS to avoid blank space */
 
         .product-card .product-desc {
             flex: 1 1 auto;
@@ -709,6 +706,48 @@
 
             // Run once on load so the default value (if any) is reflected immediately
             updateTables();
+        })();
+    </script>
+    <script>
+        // Match all product cards to the height of the "Paquete Personalizado" card (desktop only)
+        (function(){
+            function syncCardHeights(){
+                // On small screens, let cards be auto-height
+                if (window.innerWidth < 768) {
+                    document.querySelectorAll('.product-card').forEach(function(c){ c.style.height = ''; });
+                    return;
+                }
+
+                var cards = Array.from(document.querySelectorAll('.product-card'));
+                if (!cards.length) return;
+
+                // Find the Paquete Personalizado card by header text
+                var personalizado = cards.find(function(card){
+                    var h = card.querySelector('h3');
+                    return h && h.textContent.trim().toLowerCase().indexOf('paquete personalizado') !== -1;
+                });
+                if (!personalizado) return;
+
+                // Compute its full height and apply it to all cards
+                var target = Math.ceil(personalizado.getBoundingClientRect().height);
+                cards.forEach(function(card){
+                    card.style.height = target + 'px';
+                });
+
+                // Trigger scroll update for premium faux thumb if present
+                var premium = document.querySelector('.product-card.premium');
+                if (premium) premium.dispatchEvent(new Event('scroll'));
+            }
+
+            window.addEventListener('resize', function(){
+                // debounce
+                clearTimeout(window._syncCardHeightsTimer);
+                window._syncCardHeightsTimer = setTimeout(syncCardHeights, 120);
+            });
+
+            document.addEventListener('DOMContentLoaded', syncCardHeights);
+            // run after layout
+            setTimeout(syncCardHeights, 150);
         })();
     </script>
     <script>
