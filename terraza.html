@@ -180,7 +180,11 @@
 
         /* Make the Premium card itself scrollable so the scrollbar spans the full card height */
         .product-card.premium {
-            overflow: auto; /* scrollbar covers entire card */
+            /* Force vertical scrollbar to be visible even when not actively scrolling */
+            overflow-y: scroll; /* always-show vertical scrollbar */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(0,0,0,0.15) transparent;
         }
 
         /* Remove inner scrolling on the description so the card-level scrollbar is used */
@@ -190,8 +194,9 @@
         }
 
         /* Scrollbar styling on the card container for WebKit */
-        .product-card.premium::-webkit-scrollbar { width: 12px; }
-        .product-card.premium::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
+    .product-card.premium::-webkit-scrollbar { width: 12px; }
+    .product-card.premium::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
+    .product-card.premium::-webkit-scrollbar-track { background: transparent; }
 
         /* Optional: nicer scrollbar for WebKit browsers */
         .product-card.premium .product-desc::-webkit-scrollbar { width: 10px; }
