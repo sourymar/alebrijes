@@ -431,7 +431,7 @@
                         <p>📩 <strong>Invitación digital personalizada</strong></p>
 
                         <h4>🪑 Mobiliario:</h4>
-                        <p><span id="tables-count" style="font-weight:700; display:none;"></span>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
+                        <p><span class="tables-count" style="font-weight:700; display:none;"></span>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
 
                         <h4>🎂 Área de festejo:</h4>
                         <ul>
@@ -482,7 +482,7 @@
                         <p>📩 <strong>Invitación digital personalizada</strong></p>
 
                         <h4>🪑 Mobiliario:</h4>
-                        <p><span id="tables-count" style="font-weight:700; display:none;"></span>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
+                        <p><span class="tables-count" style="font-weight:700; display:none;"></span>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
 
                         <h4>🎂 Área de festejo:</h4>
                         <ul>
@@ -628,18 +628,20 @@
         // If the select has a default value, the number will be displayed on load.
         (function(){
             var peopleSelect = document.getElementById('people-select-global');
-            var tablesCount = document.getElementById('tables-count');
-            if (!peopleSelect || !tablesCount) return; // nothing to do
+            var tablesSpans = document.querySelectorAll('.tables-count');
+            if (!peopleSelect || !tablesSpans || tablesSpans.length === 0) return; // nothing to do
 
             function updateTables(){
                 var val = peopleSelect.value;
                 if (!val) {
-                    tablesCount.style.display = 'none';
+                    tablesSpans.forEach(function(s){ s.style.display = 'none'; });
                     return;
                 }
                 var n = Math.ceil(Number(val) / 10);
-                tablesCount.textContent = n + ' ';
-                tablesCount.style.display = 'inline';
+                tablesSpans.forEach(function(s){
+                    s.textContent = n + ' ';
+                    s.style.display = 'inline';
+                });
             }
 
             // Update when user changes the selection
