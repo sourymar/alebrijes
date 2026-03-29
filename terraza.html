@@ -188,6 +188,14 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Reduce the height of the Paquete Personalizado card on desktop so other cards match it */
+        @media (min-width: 768px) {
+            .product-card.personalizado {
+                height: 420px; /* smaller than previous; adjust as needed */
+                overflow-y: auto; /* allow internal scrolling if content overflows the smaller height */
+            }
+        }
+
         /* Remove inner scrolling on the description so the card-level scrollbar is used */
         .product-card.premium .product-desc {
             flex: 0 0 auto;
@@ -608,7 +616,7 @@
                     </div>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card personalizado">
                     <h3>Paquete Personalizado</h3>
                     <div class="product-desc">
                         <p><strong>Diseña tu evento a tu medida</strong></p>
