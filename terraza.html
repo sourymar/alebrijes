@@ -173,6 +173,11 @@
             height: 100%; /* let grid row sizing control the card height */
         }
 
+        /* Ensure cards have a consistent minimum height so they align visually */
+        .product-card {
+            min-height: 480px; /* adjust as needed for desktop */
+        }
+
         .product-card .product-desc {
             flex: 1 1 auto;
             /* allow content areas to grow */
@@ -180,11 +185,10 @@
 
         /* Make the Premium card itself scrollable so the scrollbar spans the full card height */
         .product-card.premium {
-            /* Force vertical scrollbar to be visible even when not actively scrolling */
-            overflow-y: scroll; /* always-show vertical scrollbar */
+            /* Use native scrollbar when content overflows, but provide a visible custom track/thumb for consistency */
+            overflow-y: auto;
+            position: relative; /* for custom thumb positioning */
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: rgba(0,0,0,0.15) transparent;
         }
 
         /* Remove inner scrolling on the description so the card-level scrollbar is used */
@@ -197,6 +201,27 @@
     .product-card.premium::-webkit-scrollbar { width: 12px; }
     .product-card.premium::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
     .product-card.premium::-webkit-scrollbar-track { background: transparent; }
+
+        /* Faux scrollbar track & thumb (visible on all platforms) */
+        .product-card.premium .faux-scroll-track {
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            width: 8px;
+            bottom: 12px;
+            background: rgba(0,0,0,0.04);
+            border-radius: 6px;
+            pointer-events: none; /* allow clicks through to scroll */
+        }
+
+        .product-card.premium .faux-scroll-thumb {
+            position: absolute;
+            right: 10px;
+            width: 8px;
+            background: rgba(0,0,0,0.18);
+            border-radius: 6px;
+            pointer-events: none;
+        }
 
         /* Optional: nicer scrollbar for WebKit browsers */
         .product-card.premium .product-desc::-webkit-scrollbar { width: 10px; }
@@ -684,6 +709,50 @@
 
             // Run once on load so the default value (if any) is reflected immediately
             updateTables();
+        })();
+    </script>
+    <script>
+        // Create a visible faux scrollbar inside the Premium card and sync it with native scrolling.
+        (function(){
+            var premium = document.querySelector('.product-card.premium');
+            if (!premium) return;
+
+            // Create track and thumb elements
+            var track = document.createElement('div');
+            track.className = 'faux-scroll-track';
+            var thumb = document.createElement('div');
+            thumb.className = 'faux-scroll-thumb';
+            premium.appendChild(track);
+            premium.appendChild(thumb);
+
+            function updateThumb(){
+                var scrollHeight = premium.scrollHeight;
+                var clientH = premium.clientHeight;
+                var trackTop = 12; // matches CSS top
+                var trackHeight = clientH - 24; // top + bottom padding
+                if (scrollHeight <= clientH) {
+                    // content fits, show full-thumb
+                    thumb.style.height = (trackHeight) + 'px';
+                    thumb.style.top = trackTop + 'px';
+                    return;
+                }
+
+                var ratio = clientH / scrollHeight;
+                var thumbH = Math.max(20, Math.floor(trackHeight * ratio));
+                var maxThumbTop = trackHeight - thumbH;
+                var scrollRatio = premium.scrollTop / (scrollHeight - clientH);
+                var thumbTop = Math.floor(trackTop + (maxThumbTop * scrollRatio));
+
+                thumb.style.height = thumbH + 'px';
+                thumb.style.top = thumbTop + 'px';
+            }
+
+            // Update on scroll and resize
+            premium.addEventListener('scroll', updateThumb);
+            window.addEventListener('resize', updateThumb);
+
+            // Initialize after a brief timeout to allow layout
+            setTimeout(updateThumb, 50);
         })();
     </script>
 </body>
