@@ -431,7 +431,7 @@
                         <p>📩 <strong>Invitación digital personalizada</strong></p>
 
                         <h4>🪑 Mobiliario:</h4>
-                        <p>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
+                        <p><span id="tables-count" style="font-weight:700; display:none;"></span>Mesas con mantel y 10 sillas por mesa (opción infantil o adulto)</p>
 
                         <h4>🎂 Área de festejo:</h4>
                         <ul>
@@ -534,5 +534,35 @@
     <footer style="background:#f7f7f7;padding:1rem;margin-top:2rem;text-align:center">
         <div class="container">© Alebrijes Diversión Total</div>
     </footer>
+    <script>
+        // Show the number of tables (value / 10 rounded up) only after the user interacts with the people selector.
+        (function(){
+            var peopleSelect = document.getElementById('people-select-global');
+            var tablesCount = document.getElementById('tables-count');
+            if (!peopleSelect || !tablesCount) return; // nothing to do
+
+            var userInteracted = false;
+
+            function updateTables(){
+                var val = peopleSelect.value;
+                if (!userInteracted || !val) {
+                    tablesCount.style.display = 'none';
+                    return;
+                }
+                var n = Math.ceil(Number(val) / 10);
+                tablesCount.textContent = n + ' ';
+                tablesCount.style.display = 'inline';
+            }
+
+            // Only show after an explicit user selection (change event)
+            peopleSelect.addEventListener('change', function(){
+                userInteracted = true;
+                updateTables();
+            });
+
+            // keep hidden on load even if the select has a default value
+            updateTables();
+        })();
+    </script>
 </body>
 </html>
