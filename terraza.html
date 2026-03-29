@@ -163,6 +163,27 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
+        /* Make card content stretch so we can constrain the description height on the Premium card */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card .product-desc {
+            flex: 1 1 auto;
+        }
+
+        /* Limit the height of the Premium card description and enable scrolling so all cards match visually */
+        .product-card.premium .product-desc {
+            max-height: 360px; /* adjust as needed */
+            overflow: auto;
+            padding-right: 0.5rem; /* small padding to avoid content touching scrollbar */
+        }
+
+        /* Optional: nicer scrollbar for WebKit browsers */
+        .product-card.premium .product-desc::-webkit-scrollbar { width: 10px; }
+        .product-card.premium .product-desc::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
+
         .product-image {
             width: 100%;
             height: 200px;
@@ -461,7 +482,7 @@
                     </div>
                 </div>
 
-                <div class="product-card">
+                <div class="product-card premium">
                     <h3>Paquete Premium</h3>
                     <div class="product-desc">
 
