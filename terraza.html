@@ -154,6 +154,9 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
+            /* Make rows distribute evenly so cards in the same row match height */
+            grid-auto-rows: 1fr;
+            align-items: stretch;
         }
 
         .product-card {
@@ -167,15 +170,17 @@
         .product-card {
             display: flex;
             flex-direction: column;
+            height: 100%; /* let grid row sizing control the card height */
         }
 
         .product-card .product-desc {
             flex: 1 1 auto;
+            /* allow content areas to grow and for premium to scroll */
         }
 
-        /* Limit the height of the Premium card description and enable scrolling so all cards match visually */
+        /* Let the Premium card's description take the remaining space and scroll within it */
         .product-card.premium .product-desc {
-            max-height: 360px; /* adjust as needed */
+            flex: 1 1 auto;
             overflow: auto;
             padding-right: 0.5rem; /* small padding to avoid content touching scrollbar */
         }
