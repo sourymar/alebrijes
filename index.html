@@ -171,19 +171,28 @@
         /* Diagonal "PROXIMAMENTE" ribbon for upcoming services */
         .service-card .coming-soon {
             position: absolute;
-            top: 8px;
-            left: -20px;
+            top: 12px;
+            left: 50%;
             background: rgba(220,53,69,0.95); /* bootstrap danger-like color */
             color: #fff;
-            padding: 6px 110px; /* wider padding so the rotated ribbon shows full text */
+            padding: 6px 80px; /* adjust padding for centered ribbon */
             font-weight: 700;
             font-size: 0.95rem;
-            transform: rotate(-45deg);
+            transform: translateX(-50%) rotate(-45deg);
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             z-index: 10;
             pointer-events: none;
             letter-spacing: 1px;
             white-space: nowrap; /* ensure text doesn't wrap */
+        }
+
+        /* Reduce ribbon size on small screens so it doesn't overflow */
+        @media (max-width: 480px) {
+            .service-card .coming-soon {
+                padding: 6px 40px;
+                font-size: 0.85rem;
+                top: 8px;
+            }
         }
 
         .service-card:hover {
