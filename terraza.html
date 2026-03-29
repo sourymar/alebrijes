@@ -175,15 +175,23 @@
 
         .product-card .product-desc {
             flex: 1 1 auto;
-            /* allow content areas to grow and for premium to scroll */
+            /* allow content areas to grow */
         }
 
-        /* Let the Premium card's description take the remaining space and scroll within it */
-        .product-card.premium .product-desc {
-            flex: 1 1 auto;
-            overflow: auto;
-            padding-right: 0.5rem; /* small padding to avoid content touching scrollbar */
+        /* Make the Premium card itself scrollable so the scrollbar spans the full card height */
+        .product-card.premium {
+            overflow: auto; /* scrollbar covers entire card */
         }
+
+        /* Remove inner scrolling on the description so the card-level scrollbar is used */
+        .product-card.premium .product-desc {
+            flex: 0 0 auto;
+            padding-right: 0.5rem; /* keep small padding to avoid content touching scrollbar */
+        }
+
+        /* Scrollbar styling on the card container for WebKit */
+        .product-card.premium::-webkit-scrollbar { width: 12px; }
+        .product-card.premium::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
 
         /* Optional: nicer scrollbar for WebKit browsers */
         .product-card.premium .product-desc::-webkit-scrollbar { width: 10px; }
