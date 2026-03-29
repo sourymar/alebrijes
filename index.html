@@ -165,33 +165,37 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
             position: relative; /* allow positioned children like ribbon */
-            overflow: visible; /* allow ribbon to extend outside card so text isn't clipped */
+            overflow: hidden; /* keep ribbon inside the card */
         }
 
         /* Diagonal "PROXIMAMENTE" ribbon for upcoming services */
         .service-card .coming-soon {
             position: absolute;
-            top: 12px;
+            /* center inside the card */
+            top: 50%;
             left: 50%;
+            width: 70%;
             background: rgba(220,53,69,0.95); /* bootstrap danger-like color */
             color: #fff;
-            padding: 6px 80px; /* adjust padding for centered ribbon */
+            padding: 6px 0; /* vertical padding, width controls horizontal size */
             font-weight: 700;
             font-size: 0.95rem;
-            transform: translateX(-50%) rotate(-45deg);
+            transform: translate(-50%, -50%) rotate(-45deg);
             box-shadow: 0 3px 8px rgba(0,0,0,0.2);
             z-index: 10;
             pointer-events: none;
             letter-spacing: 1px;
+            text-align: center;
             white-space: nowrap; /* ensure text doesn't wrap */
+            border-radius: 4px;
         }
 
         /* Reduce ribbon size on small screens so it doesn't overflow */
         @media (max-width: 480px) {
             .service-card .coming-soon {
-                padding: 6px 40px;
+                width: 90%;
                 font-size: 0.85rem;
-                top: 8px;
+                transform: translate(-50%, -50%) rotate(-45deg);
             }
         }
 
