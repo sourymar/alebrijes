@@ -736,9 +736,12 @@
                 });
                 if (!personalizado) return;
 
-                // Compute its full height and apply it to all cards
+                // Compute its full height and apply it to all other cards (keep Personalizado auto-sized)
                 var target = Math.ceil(personalizado.getBoundingClientRect().height);
+                // Ensure Personalizado stays auto-height
+                personalizado.style.height = '';
                 cards.forEach(function(card){
+                    if (card === personalizado) return;
                     card.style.height = target + 'px';
                 });
 
