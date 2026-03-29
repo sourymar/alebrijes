@@ -191,8 +191,8 @@
         /* Reduce the height of the Paquete Personalizado card on desktop so other cards match it */
         @media (min-width: 768px) {
             .product-card.personalizado {
-                height: 420px; /* smaller than previous; adjust as needed */
-                overflow-y: auto; /* allow internal scrolling if content overflows the smaller height */
+                height: auto; /* let content determine height */
+                overflow: visible; /* no scrollbar inside Personalizado */
             }
         }
 
