@@ -493,8 +493,10 @@
             <p>Disfruta de un espacio completamente equipado para que tu evento sea cómodo, divertido y sin preocupaciones.</p>
 
             <div class="form-group" style="margin: 1rem 0 1.5rem 0;">
-                <label for="people-select-global" style="font-weight:700;">Selecciona el no. de personas</label>
-                <select id="people-select-global" class="people-select" style="width:160px; padding:0.5rem; margin-top:0.5rem;">
+                <div class="form-row" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+                    <div style="display:flex;flex-direction:column;">
+                        <label for="people-select-global" style="font-weight:700;">Selecciona el no. de personas</label>
+                        <select id="people-select-global" class="people-select" style="width:160px; padding:0.5rem; margin-top:0.5rem;">
                     <option value="30">30</option>
                     <option value="40">40</option>
                     <option value="50">50</option>
@@ -502,6 +504,13 @@
                     <option value="70">70</option>
                     <option value="80">80</option>
                 </select>
+                    </div>
+
+                    <div style="display:flex;flex-direction:column;">
+                        <label for="event-date" style="font-weight:700;">Fecha del evento</label>
+                        <input type="date" id="event-date" style="padding:0.5rem; margin-top:0.5rem;" />
+                    </div>
+                </div>
             </div>
 
             <div class="products-grid">
@@ -745,6 +754,26 @@
 
             // Run once on load so the default value (if any) is reflected immediately
             updateTables();
+
+            // Set event date min to today and prevent picking past dates
+            var dateInput = document.getElementById('event-date');
+            if (dateInput) {
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = String(today.getMonth()+1).padStart(2,'0');
+                var dd = String(today.getDate()).padStart(2,'0');
+                var minDate = yyyy + '-' + mm + '-' + dd;
+                dateInput.min = minDate;
+                // If no value set, default to minDate
+                if (!dateInput.value) dateInput.value = minDate;
+
+                // Prevent manual entry of past dates
+                dateInput.addEventListener('change', function(){
+                    if (dateInput.value && dateInput.value < dateInput.min) {
+                        dateInput.value = dateInput.min;
+                    }
+                });
+            }
         })();
     </script>
     <script>
