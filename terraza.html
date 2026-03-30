@@ -768,8 +768,19 @@
                 premiumCard.style.height = '';
                 var natural = Math.ceil(premiumCard.getBoundingClientRect().height);
 
-                // Reduce Premium card to half its natural height, and apply that size to all cards
-                var target = Math.max(120, Math.ceil(natural / 2)); // min height safeguard
+                // Reduce Premium card to half its natural height, then add space for the action area so the 'Cotizar' button is visible
+                var half = Math.max(120, Math.ceil(natural / 2)); // min height safeguard
+                var actionHeight = 0;
+                var actionEl = premiumCard.querySelector('.card-actions');
+                if (actionEl) {
+                    // include margins
+                    var style = window.getComputedStyle(actionEl);
+                    var mt = parseFloat(style.marginTop) || 0;
+                    var mb = parseFloat(style.marginBottom) || 0;
+                    actionHeight = Math.ceil(actionEl.getBoundingClientRect().height + mt + mb + 6); // small buffer
+                }
+
+                var target = half + actionHeight;
                 premiumCard.style.height = target + 'px';
 
                 cards.forEach(function(card){
