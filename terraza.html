@@ -362,6 +362,25 @@
             color: white;
         }
 
+        .btn-cotizar {
+            background: #667eea; /* purple brand color */
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .card-actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: flex-start;
+            gap: 0.5rem;
+        }
+
         .btn:hover {
             opacity: 0.9;
             transform: translateY(-2px);
@@ -528,6 +547,9 @@
                         </ul>
 
                     </div>
+                    <div class="card-actions">
+                        <a href="#como-cotizar" class="btn btn-cotizar">Cotizar</a>
+                    </div>
                 </div>
 
                 <div class="product-card premium">
@@ -614,6 +636,9 @@
                         </ul>
 
                     </div>
+                    <div class="card-actions">
+                        <a href="#como-cotizar" class="btn btn-cotizar">Cotizar</a>
+                    </div>
                 </div>
 
                 <div class="product-card personalizado">
@@ -639,6 +664,9 @@
                         <p>Nuestro equipo te asesorará para armar la mejor combinación y brindarte una cotización personalizada, asegurando que tu evento sea justo como lo imaginas.</p>
 
                         <p>✨ Ideal para quienes buscan flexibilidad, control de presupuesto y un evento totalmente a su estilo.</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="#como-cotizar" class="btn btn-cotizar">Cotizar</a>
                     </div>
                 </div>
             </div>
@@ -672,7 +700,7 @@
                 <li>Cancelaciones con más de 30 días hábiles: reembolso de anticipo (menos gastos administrativos).</li>
             </ul>
 
-            <h3>Cómo cotizar / reservar</h3>
+            <h3 id="como-cotizar">Cómo cotizar / reservar</h3>
             <ol>
                 <li>Haz clic en "Solicitar cotización / Reservar" y agrega la Terraza a tu cotización en el catálogo.</li>
                 <li>Indícanos fecha, horario, número aproximado de invitados y servicios adicionales deseados.</li>
