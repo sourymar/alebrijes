@@ -182,10 +182,12 @@
 
         /* Make the Premium card itself scrollable so the scrollbar spans the full card height */
         .product-card.premium {
-            /* Use native scrollbar when content overflows, but provide a visible custom track/thumb for consistency */
+            /* Use native scrolling but hide the native scrollbar so only the faux scrollbar is visible */
             overflow-y: auto;
             position: relative; /* for custom thumb positioning */
             -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
         }
 
         /* Reduce the height of the Paquete Personalizado card on desktop so other cards match it */
@@ -203,8 +205,9 @@
         }
 
         /* Scrollbar styling on the card container for WebKit */
-    .product-card.premium::-webkit-scrollbar { width: 12px; }
-    .product-card.premium::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
+    /* Hide WebKit native scrollbar while keeping the faux scrollbar visible */
+    .product-card.premium::-webkit-scrollbar { width: 0; height: 0; }
+    .product-card.premium::-webkit-scrollbar-thumb { background: transparent; }
     .product-card.premium::-webkit-scrollbar-track { background: transparent; }
 
         /* Faux scrollbar track & thumb (visible on all platforms) */
