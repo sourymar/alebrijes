@@ -560,7 +560,7 @@
 
                     </div>
                     <div class="card-actions">
-                        <a href="#como-cotizar" class="btn btn-cotizar">Cotizar</a>
+                        <a href="#como-cotizar" id="cotizar-base" class="btn btn-cotizar">Cotizar</a>
                     </div>
                 </div>
 
@@ -774,6 +774,38 @@
                     }
                 });
             }
+        })();
+    </script>
+    <script>
+        // Open WhatsApp with prefilled message for Paquete Base
+        (function(){
+            var btn = document.getElementById('cotizar-base');
+            if (!btn) return;
+
+            btn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                var peopleEl = document.getElementById('people-select-global');
+                var dateEl = document.getElementById('event-date');
+                var people = peopleEl ? peopleEl.value : '';
+                var date = dateEl ? dateEl.value : '';
+
+                if (!people) {
+                    alert('Por favor selecciona el número de personas.');
+                    if (peopleEl) peopleEl.focus();
+                    return;
+                }
+                if (!date) {
+                    alert('Por favor selecciona la fecha del evento.');
+                    if (dateEl) dateEl.focus();
+                    return;
+                }
+
+                // Phone number provided by user request
+                var phone = '3314687877';
+                var text = 'Hola, me interesa cotizar el Paquete Base para un evento de ' + people + ' personas con fecha ' + date + '.';
+                var url = 'https://wa.me/' + encodeURIComponent(phone) + '?text=' + encodeURIComponent(text);
+                window.open(url, '_blank');
+            });
         })();
     </script>
     <script>
