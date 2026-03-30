@@ -780,7 +780,9 @@
                     actionHeight = Math.ceil(actionEl.getBoundingClientRect().height + mt + mb + 6); // small buffer
                 }
 
-                var target = half + actionHeight;
+                // Add a small buffer so the action button and any margins fit comfortably
+                var extraBuffer = 40; // px
+                var target = half + actionHeight + extraBuffer;
                 premiumCard.style.height = target + 'px';
 
                 cards.forEach(function(card){
