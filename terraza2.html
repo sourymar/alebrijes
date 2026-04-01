@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terraza Alebrijes | Renta para Eventos</title>
+  <style>
+    :root {
+      --bg: #f4fbff;
+      --surface: #ffffff;
+      --primary: #1e3a8a; /* azul fuerte del logo */
+      --primary-dark: #14245c;
+      --accent: #facc15; /* amarillo */
+      --accent-2: #ef4444; /* rojo */
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --success: #16a34a;
+      --shadow: 0 18px 45px rgba(30, 58, 138, 0.15);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fffaf7 0%, #fff 35%, #fff8f4 100%);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .95rem 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: rgba(255,255,255,.7);
+      border-color: rgba(255,255,255,.55);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(12px);
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 250, 247, .78);
+      border-bottom: 1px solid rgba(168,95,61,.08);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.15rem;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 4.5rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .95fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: .96;
+      margin: 1rem 0 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+      margin-top: 1.5rem;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .8rem;
+      margin-top: 1.8rem;
+    }
+
+    .hero-point {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 8px 22px rgba(50, 28, 18, .05);
+    }
+
+    .hero-point strong { display: block; font-size: 1.1rem; }
+    .hero-point span { color: var(--muted); font-size: .95rem; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+    }
+
+    .card-photo,
+    .floating-card {
+      position: absolute;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.55);
+    }
+
+    .card-photo.main {
+      inset: 0 0 82px 72px;
+    }
+
+    .card-photo.small {
+      width: 240px;
+      left: 0;
+      bottom: 0;
+      aspect-ratio: 4 / 5;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .floating-card {
+      right: 0;
+      top: 1.2rem;
+      padding: 1rem 1.1rem;
+      width: 220px;
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(14px);
+    }
+
+    .floating-card strong { font-size: 1rem; }
+    .floating-card p { font-size: .92rem; margin: .45rem 0 0; color: var(--muted); line-height: 1.5; }
+
+    section { padding: 2.4rem 0; }
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 1.5rem;
+    }
+    .section-head h2 {
+      margin: .5rem 0 .8rem;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -.03em;
+    }
+    .section-head p { color: var(--muted); line-height: 1.75; }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .benefit {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1.35rem;
+      box-shadow: 0 8px 22px rgba(50, 28, 18, .04);
+    }
+
+    .benefit .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #fff2eb;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      margin-bottom: .9rem;
+    }
+
+    .benefit h3 { margin: 0 0 .5rem; font-size: 1.02rem; }
+    .benefit p { margin: 0; color: var(--muted); line-height: 1.65; font-size: .96rem; }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .package {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(50, 28, 18, .06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .package.featured {
+      background: linear-gradient(180deg, #fff 0%, #fff4ee 100%);
+      border-color: rgba(168,95,61,.25);
+      transform: translateY(-6px);
+    }
+
+    .badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--primary);
+      color: #fff;
+      padding: .45rem .8rem;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .package h3 { margin: 0 0 .35rem; font-size: 1.35rem; }
+    .package .subtitle { color: var(--muted); line-height: 1.6; min-height: 52px; }
+    .price {
+      font-size: 2.35rem;
+      font-weight: 900;
+      margin: 1rem 0 .2rem;
+      letter-spacing: -.05em;
+    }
+    .price small { font-size: .95rem; color: var(--muted); font-weight: 600; }
+
+    .package ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 1.4rem;
+      display: grid;
+      gap: .8rem;
+      color: var(--text);
+    }
+
+    .package li {
+      display: flex;
+      gap: .7rem;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .package li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 900;
+    }
+
+    .package .btn { margin-top: auto; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      grid-template-rows: 250px 250px;
+      gap: 1rem;
+    }
+
+    .gallery .item {
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      min-height: 220px;
+    }
+
+    .gallery .item:first-child { grid-row: span 2; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .gallery .item:hover img { transform: scale(1.04); }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .testimonial {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 1.4rem;
+      box-shadow: 0 10px 24px rgba(50, 28, 18, .05);
+    }
+
+    .testimonial p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .testimonial strong { display: block; }
+    .testimonial span { color: var(--muted); font-size: .95rem; }
+
+    .cta {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent-2) 100%);
+      color: #fff;
+      border-radius: 34px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 1rem;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta p { color: rgba(255,255,255,.82); line-height: 1.75; }
+
+    .contact-box {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      padding: 1.2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .contact-box div {
+      padding: .7rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .contact-box div:last-child { border-bottom: 0; }
+    .contact-box strong { display: block; margin-bottom: .2rem; }
+    .contact-box span { color: rgba(255,255,255,.82); }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .cta,
+      .benefits,
+      .packages,
+      .testimonials { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
+      .gallery .item:first-child { grid-row: span 1; grid-column: span 2; }
+      .hero-visual { min-height: 480px; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 2rem; }
+      .hero-grid,
+      .benefits,
+      .packages,
+      .testimonials,
+      .cta,
+      .hero-points { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; grid-template-rows: none; }
+      .gallery .item:first-child { grid-column: span 1; }
+      .hero-visual { min-height: auto; display: grid; gap: 1rem; }
+      .card-photo.main,
+      .card-photo.small,
+      .floating-card {
+        position: relative;
+        inset: auto;
+        width: 100%;
+      }
+      .card-photo.main { aspect-ratio: 4 / 3; }
+      .card-photo.small { aspect-ratio: 4 / 3; }
+      .floating-card { right: auto; top: auto; }
+      .package.featured { transform: none; }
+      .cta { padding: 1.5rem; }
+      .hero h1 { font-size: 2.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <img src="C:\\alebrijesPage\\alebrijes\\logo.png" alt="Logo Terraza Alebrijes" style="width:60px;height:60px;object-fit:contain;" />
+        <div>
+          <div>Terraza Alebrijes</div>
+          <small style="color: var(--muted); font-weight: 600;">Eventos inolvidables</small>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#paquetes">Paquetes</a>
+        <a href="#galeria">Galería</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#contacto" class="btn btn-primary">Cotiza ahora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="tag">✨ Terraza premium para fiestas, reuniones y celebraciones especiales</div>
+          <h1>Haz que tu evento se vea tan especial como lo imaginas.</h1>
+          <p>
+            Renta una terraza elegante, versátil y lista para crear momentos memorables. Desde cumpleaños íntimos hasta celebraciones premium, en <strong>Terraza Alebrijes</strong> tenemos el espacio y el paquete ideal para ti.
+          </p>
+          <div class="hero-actions">
+            <a href="#contacto" class="btn btn-primary">Reservar fecha</a>
+            <a href="#paquetes" class="btn btn-secondary">Ver paquetes</a>
+          </div>
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>120 personas</strong>
+              <span>Capacidad cómoda para tu evento</span>
+            </div>
+            <div class="hero-point">
+              <strong>Ubicación ideal</strong>
+              <span>Acceso práctico y ambiente exclusivo</span>
+            </div>
+            <div class="hero-point">
+              <strong>Atención personalizada</strong>
+              <span>Te acompañamos de inicio a fin</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="card-photo main">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80" alt="Terraza decorada para evento nocturno" />
+          </div>
+          <div class="card-photo small">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80" alt="Celebración en terraza con luces" />
+          </div>
+          <div class="floating-card">
+            <strong>Paquete Premium</strong>
+            <p>El favorito para quienes quieren una celebración elegante, completa y lista para sorprender.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Por qué elegirnos</div>
+          <h2>Un espacio diseñado para vender experiencias, no solo fechas.</h2>
+          <p>
+            Creamos el entorno perfecto para que tus invitados disfruten, se tomen fotos increíbles y recuerden tu evento por mucho tiempo. Nuestra propuesta combina estética, comodidad y flexibilidad.
+          </p>
+        </div>
+        <div class="benefits">
+          <article class="benefit">
+            <div class="icon">🌆</div>
+            <h3>Ambiente exclusivo</h3>
+            <p>Una terraza moderna con iluminación cálida, ideal para eventos elegantes, casuales o personalizados.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">🎉</div>
+            <h3>Versátil para cualquier ocasión</h3>
+            <p>Perfecta para cumpleaños, reuniones familiares, pedidas, brunchs, fiestas privadas y eventos corporativos.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">📸</div>
+            <h3>Vista y spots instagrameables</h3>
+            <p>Cada rincón está pensado para lucir espectacular en fotos, videos y recuerdos especiales.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">🤝</div>
+            <h3>Paquetes a tu medida</h3>
+            <p>Desde una opción práctica hasta una experiencia premium o totalmente personalizada según tu idea.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="paquetes">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Paquetes</div>
+          <h2>Elige la experiencia que mejor se adapte a tu evento.</h2>
+          <p>
+            Todos nuestros paquetes están pensados para ayudarte a organizar más fácil, proyectar una mejor imagen y disfrutar tu celebración sin complicaciones.
+          </p>
+        </div>
+        <div class="packages">
+          <article class="package">
+            <h3>Paquete Base</h3>
+            <p class="subtitle">Ideal para reuniones prácticas, cumpleaños pequeños y eventos con presupuesto inteligente.</p>
+            <div class="price">$4,900 <small>/ evento</small></div>
+            <ul>
+              <li><strong>Duración:</strong> 5 horas (10:00 a.m. a 3:00 p.m. o 5:00 p.m. a 10:00 p.m.)</li>
+              <li>Invitación digital personalizada</li>
+              <li><strong>Mobiliario:</strong> 3 mesas con mantel y 10 sillas por mesa (infantil o adulto)</li>
+              <li><strong>Área de festejo:</strong> Mesa especial para pastel</li>
+              <li><strong>Entretenimiento:</strong> Bocina, Wi-Fi y piñatero</li>
+              <li><strong>Alimentos y bebidas:</strong> Barra con parrilla eléctrica, asador, refrigerador y hielera</li>
+              <li><strong>Servicios:</strong> Insumos de baño y servicio de limpieza</li>
+            </ul>
+            <a href="#contacto" class="btn btn-secondary">Solicitar paquete base</a>
+          </article>
+
+          <article class="package featured">
+            <div class="badge">Más vendido</div>
+            <h3>Paquete Premium</h3>
+            <p class="subtitle">La opción favorita para quienes quieren una celebración elegante, completa y memorable.</p>
+            <div class="price">$8,900 <small>/ evento</small></div>
+            <ul>
+              <li><strong>Duración:</strong> 5 horas (10:00 a.m. a 3:00 p.m. o 5:00 p.m. a 10:00 p.m.)</li>
+              <li>Invitación digital personalizada</li>
+              <li><strong>Mobiliario:</strong> 3 mesas con mantel y 10 sillas por mesa (infantil o adulto)</li>
+              <li><strong>Área de festejo:</strong> Mesa especial para pastel</li>
+              <li><strong>Entretenimiento:</strong> Bocina, Wi-Fi, brincolín y piñatero</li>
+              <li><strong>Alimentos y bebidas:</strong> Barra con parrilla eléctrica, asador, refrigerador y hielera</li>
+              <li><strong>Decoración:</strong> Decoración básica personalizada según temática</li>
+              <li><strong>Banquete:</strong> Alimentos para invitados, refresco ilimitado y hielo incluido</li>
+              <li><strong>Pastel:</strong> Pastel básico, vela, platos y tenedores</li>
+              <li><strong>Extras:</strong> Piñata y bolo básico para invitados</li>
+              <li><strong>Recuerdos:</strong> Servicio de fotografía y video</li>
+              <li><strong>Coordinación:</strong> Coordinador durante el evento</li>
+              <li><strong>Servicios:</strong> Insumos de baño y servicio de limpieza</li>
+            </ul>
+            <a href="#contacto" class="btn btn-primary">Quiero premium</a>
+          </article>
+
+          <article class="package">
+            <h3>Paquete Personalizado</h3>
+            <p class="subtitle">Diseñado para clientes que quieren algo único, con detalles especiales y una experiencia a medida.</p>
+            <div class="price">A cotizar <small>/ según idea</small></div>
+            <ul>
+              <li>Configuración según número de invitados</li>
+              <li>Opciones de decoración temática</li>
+              <li>Extras como DJ, catering o mobiliario especial</li>
+              <li>Horario y montaje flexibles</li>
+              <li>Atención personalizada para crear tu concepto</li>
+            </ul>
+            <a href="#contacto" class="btn btn-secondary">Cotizar personalizado</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Galería</div>
+          <h2>Visualiza cómo se verá tu próximo gran momento.</h2>
+          <p>
+            Una presentación visual poderosa ayuda a convertir visitas en reservas. Estas imágenes transmiten el estilo, la atmósfera y el potencial del espacio.
+          </p>
+        </div>
+        <div class="gallery">
+          <div class="item"><img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1400&q=80" alt="Terraza para evento al atardecer" /></div>
+          <div class="item"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80" alt="Montaje de mesa para celebración" /></div>
+          <div class="item"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80" alt="Evento elegante en terraza" /></div>
+          <div class="item"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=900&q=80" alt="Fiesta con luces cálidas" /></div>
+          <div class="item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Espacio decorado para celebración especial" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios">
+      <div class="container">
+        <div class="section-head">
+          <div class="tag">Confianza</div>
+          <h2>Lo que dicen quienes ya celebraron con nosotros.</h2>
+          <p>
+            Los testimonios reducen dudas, elevan la confianza y ayudan a que nuevos clientes visualicen la experiencia antes de reservar.
+          </p>
+        </div>
+        <div class="testimonials">
+          <article class="testimonial">
+            <p>“La terraza superó nuestras expectativas. Se veía elegante, las fotos quedaron increíbles y todo fue muy cómodo para nuestros invitados.”</p>
+            <strong>Mariana G.</strong>
+            <span>Cumpleaños premium</span>
+          </article>
+          <article class="testimonial">
+            <p>“Nos encantó porque pudimos personalizar varios detalles. Sentimos que el evento realmente reflejaba nuestra idea desde el inicio.”</p>
+            <strong>Daniel y Fer</strong>
+            <span>Celebración privada</span>
+          </article>
+          <article class="testimonial">
+            <p>“Desde la primera llamada nos atendieron excelente. El paquete premium vale mucho la pena por la imagen que proyecta.”</p>
+            <strong>Roberto M.</strong>
+            <span>Evento familiar</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <div class="tag" style="background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.16);">Reserva hoy</div>
+            <h2 style="margin: .8rem 0 1rem; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.02;">Las mejores fechas se apartan primero.</h2>
+            <p>
+              Escríbenos y recibe una cotización rápida. Podemos ayudarte a elegir el paquete ideal y resolver cualquier duda para que tu evento quede exactamente como lo imaginas.
+            </p>
+            <div class="hero-actions">
+              <a href="https://wa.me/523314423619" class="btn btn-primary">WhatsApp</a>
+              <a href="mailto:alebrijesdt@gmail.com" class="btn btn-secondary">Enviar correo</a>
+            </div>
+          </div>
+          <div class="contact-box">
+            <div>
+              <strong>Teléfono / WhatsApp</strong>
+              <span>+52 1 000 000 0000</span>
+            </div>
+            <div>
+              <strong>Correo</strong>
+              <span>alebrijesdt@gmail.com</span>
+            </div>
+            <div>
+              <strong>Horario de atención</strong>
+              <span>Lunes a sábado · 9:00 a 19:00</span>
+            </div>
+            <div>
+              <strong>Ubicación</strong>
+              <span>Tu ciudad · Dirección de referencia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Terraza Alebrijes. Diseñada para convertir visitas en reservas. Personaliza nombre, precios, fotos y datos de contacto antes de publicar.
+    </div>
+  </footer>
+</body>
+</html>
