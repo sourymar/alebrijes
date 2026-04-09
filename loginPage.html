@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login - Alebrijes</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f4f4f6;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+    .card{background:white;padding:2rem;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08);width:360px}
+    .logo{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .logo img{width:64px;height:64px}
+    h1{font-size:1.25rem;margin:0 0 0.5rem}
+    label{display:block;margin-top:0.75rem;font-weight:600}
+    input{width:100%;padding:0.6rem;border:1px solid #ddd;border-radius:6px;margin-top:0.35rem}
+    .btn{margin-top:1rem;background:#667eea;color:white;border:none;padding:0.7rem;border-radius:6px;width:100%;cursor:pointer;font-weight:700}
+    .error{color:#b00020;margin-top:0.5rem;display:none}
+    .note{font-size:0.85rem;color:#666;margin-top:0.75rem}
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="logo">
+      <img src="logo.png" alt="Alebrijes logo">
+      <div>
+        <h1>Alebrijes - Acceso</h1>
+        <div class="note">Ingrese sus credenciales para continuar</div>
+      </div>
+    </div>
+
+    <form id="loginForm">
+      <label for="username">Usuario</label>
+      <input id="username" name="username" autocomplete="username" required>
+
+      <label for="password">Contraseña</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+      <button class="btn" type="submit">Ingresar</button>
+      <div id="error" class="error">Usuario o contraseña incorrectos</div>
+    </form>
+
+    <p class="note">Usuarios permitidos: user1..user5 (cliente demo)</p>
+  </main>
+
+  <script>
+    // Allowed credentials (client-side only, for demo use as requested)
+    const allowed = {
+      "user1": "pwd1",
+      "user2": "pwd2",
+      "user3": "pw3",
+      "user4": "pwd4",
+      "user5": "pwd5"
+    };
+
+    const form = document.getElementById('loginForm');
+    const err = document.getElementById('error');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      if(allowed[u] && allowed[u] === p){
+        // mark session and redirect to cotizacion
+        try{ sessionStorage.setItem('loggedUser', u); }catch(e){}
+        window.location.href = 'cotizacion.html';
+      } else {
+        err.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
