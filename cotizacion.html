@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- This file was created as a copy of carrito.html to serve as the 'cotizacion' landing after login. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +49,1544 @@
 
         .terms-btn {
             width: 100%;
+            text-align: left;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terms-btn:after {
+            content: '\25BC'; /* down arrow */
+            font-size: 1rem;
+            transition: transform 0.25s ease;
+        }
+
+        .terms-btn[aria-expanded="true"]:after {
+            transform: rotate(180deg);
+        }
+
+        .terms-content {
+            background: #fffef0;
+            border: 1px solid #ffeeba;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Add indentation/padding before the numbers in ordered lists inside terms */
+        .terms-content ol {
+            padding-left: 1.25rem; /* space before the list numbers */
+            margin-left: 0.25rem;
+            list-style-position: outside;
+        }
+
+        .terms-content.open {
+            display: block;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: #666;
+            position: relative;
+        }
+
+        /* Video buttons removed per request (video playback removed from page) */
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .product-total {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .flete-section, .resumen-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        .order-table th, .order-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .total-section {
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-reset {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Image Protection */
+        img {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantity-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            /* Keep order table on a single line per row on mobile: smaller font, no wrapping, ellipsis.
+               Add horizontal scroll fallback inside the resumen section so the row stays one line. */
+            .resumen-section {
+                overflow-x: auto; /* allow horizontal scroll if needed */
+            }
+
+            .order-table {
+                width: 100%;
+                min-width: 320px; /* avoid collapsing too small */
+                table-layout: fixed; /* enforce column widths */
+                border-collapse: collapse;
+            }
+
+            .order-table th, .order-table td {
+                padding: 0.25rem 0.35rem;
+                font-size: 0.78rem; /* reduce font to fit */
+                white-space: nowrap; /* keep content on one line */
+                overflow: hidden;
+                text-overflow: ellipsis; /* show ... when content is too long */
+            }
+
+            /* Allocate widths so the product column gets more room but still fits */
+            .order-table th:first-child, .order-table td:first-child {
+                width: 50%;
+                text-align: left;
+            }
+
+            .order-table th:nth-child(2), .order-table td:nth-child(2) {
+                width: 16.66%;
+                text-align: center;
+            }
+
+            .order-table th:nth-child(3), .order-table td:nth-child(3) {
+                width: 16.66%;
+                text-align: right;
+            }
+
+            .order-table th:nth-child(4), .order-table td:nth-child(4) {
+                width: 16.66%;
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Guard: require a logged user stored in sessionStorage
+        try {
+            const user = sessionStorage.getItem('loggedUser');
+            if (!user) {
+                // Not logged in — redirect to login page
+                window.location.href = 'loginPage.html';
+            }
+        } catch (e) {
+            // If sessionStorage isn't available, still redirect
+            window.location.href = 'loginPage.html';
+        }
+    </script>
+    <div class="container">
+        <header>
+            <h1>
+                <a href="index.html" title="Ir a la página principal" style="text-decoration:none;color:inherit;">
+                    <img src="logo.png" alt="Logo de Alebrijes" style="width:120px;height:120px;vertical-align:middle;margin-right:15px;">Alebrijes Diversión Total
+                </a>
+            </h1>
+            <p>COTIZADOR - Renta de Mobiliario (Acceso restringido)</p>
+        </header>
+
+        <div class="terms-section">
+            <button class="terms-btn" aria-expanded="false" onclick="toggleTerms(this)">TÉRMINOS Y CONDICIONES DE RENTA DE MOBILIARIO PARA EVENTOS</button>
+            <div class="terms-content" id="termsContent" aria-hidden="true">
+                <ol>
+                    <li>
+                        <strong>Disponibilidad del servicio</strong>
+                        <p>El servicio se encuentra disponible de lunes a domingo, sujeto a disponibilidad de inventario y agenda.</p>
+                    </li>
+
+                    <li>
+                        <strong>Cotización y confirmación del pedido</strong>
+                        <p>Toda cotización deberá ser confirmada vía WhatsApp.</p>
+                        <p>Una vez confirmada, se solicitarán los datos completos del evento para agendar el servicio.</p>
+                        <p>La disponibilidad de los artículos no está garantizada hasta que el pedido haya sido confirmado.</p>
+                    </li>
+
+                    <li>
+                        <strong>Formas de pago</strong>
+                        <ul>
+                            <li>Efectivo.</li>
+                            <li>Transferencia bancaria.</li>
+                            <li>Tarjeta de crédito o débito (+ 5% comisión).</li>
+                        </ul>
+                        <p><strong>Condiciones de pago:</strong></p>
+                        <p>En pedidos grandes, se solicitará un anticipo del 50% para apartar la fecha.</p>
+                        <p>El monto restante deberá ser liquidado antes de la entrega del mobiliario.</p>
+                        <p>En caso de pago por transferencia, este deberá realizarse y confirmarse antes de la entrega del mobiliario.</p>
+                        <p>En caso de pago en efectivo, este se realizará al momento de la entrega.</p>
+                    </li>
+
+                    <li>
+                        <strong>Facturación</strong>
+                        <p>En caso de requerir factura, deberá solicitarse al momento de agendar.</p>
+                        <p>Se deberá proporcionar la información fiscal completa por WhatsApp o correo: <a href="mailto:alebrijesdt@gmail.com">alebrijesdt@gmail.com</a></p>
+                        <p>La factura solo podrá emitirse dentro del mismo mes del pago. No se emitirán facturas posteriores a la entrega ni en meses diferentes.</p>
+                    </li>
+
+                    <li>
+                        <strong>Periodo de renta</strong>
+                        <p>La renta es por un día natural.</p>
+                        <p>El mobiliario será recolectado:</p>
+                        <ul>
+                            <li>Al día siguiente a partir de las 10:00 a.m., o</li>
+                            <li>El mismo día al finalizar el evento (previa coordinación).</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Entrega y recolección</strong>
+                        <p>El cliente deberá proporcionar información clara sobre ubicación, accesos y horarios.</p>
+                        <p>En caso de accesos complicados (escaleras, distancias largas, terrenos irregulares), podrá aplicarse un cargo adicional.</p>
+                        <p>El cliente deberá garantizar condiciones adecuadas para la entrega y recolección.</p>
+                    </li>
+
+                    <li>
+                        <strong>Responsabilidad del cliente</strong>
+                        <p>El cliente es responsable del mobiliario desde el momento de la entrega hasta su recolección, incluyendo:</p>
+                        <ul>
+                            <li>Daños por uso indebido</li>
+                            <li>Pérdida o extravío</li>
+                            <li>Daños ocasionados por: Cera, Pintura, Pegamento, Quemaduras, Cortes o rasgaduras</li>
+                        </ul>
+                        <p>En caso de daño o pérdida, el cliente deberá cubrir el costo de reparación o reposición del artículo.</p>
+                    </li>
+
+                    <li>
+                        <strong>Condiciones de entrega del mobiliario</strong>
+                        <p>El mobiliario deberá ser entregado en las mismas condiciones en que fue recibido, limpio y sin residuos (comida, bebidas, decoraciones, etc.).</p>
+                        <p>En caso de que el mobiliario sea devuelto en condiciones inadecuadas de limpieza, podrá aplicarse un cargo adicional por limpieza.</p>
+                    </li>
+
+                    <li>
+                        <strong>Cancelaciones y cambios</strong>
+                        <p>Cancelaciones con menos de 48 horas de anticipación pueden generar cargos.</p>
+                        <p>Cambios en el pedido están sujetos a disponibilidad. No se garantizan modificaciones el mismo día del evento.</p>
+                    </li>
+
+                    <li>
+                        <strong>Condiciones de uso</strong>
+                        <p>El mobiliario deberá utilizarse únicamente para el fin acordado.</p>
+                        <p>No se permite modificar, pintar o alterar los artículos.</p>
+                        <p>No se incluye personal para montaje/desmontaje, salvo que se haya contratado adicionalmente.</p>
+                    </li>
+
+                    <li>
+                        <strong>Cambios de precios</strong>
+                        <p>Los precios están sujetos a cambios sin previo aviso. Se recomienda confirmar el costo final al momento de agendar.</p>
+                    </li>
+
+                    <li>
+                        <strong>Fuerza mayor</strong>
+                        <p>No nos hacemos responsables por incumplimientos derivados de causas externas como: clima extremo, bloqueos, accidentes, situaciones de riesgo o eventos fuera de nuestro control.</p>
+                    </li>
+
+                    <li>
+                        <strong>Aceptación de términos</strong>
+                        <p>Al confirmar el pedido, el cliente acepta automáticamente todos los términos y condiciones aquí descritos.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('paquetes')">PAQUETES</button>
+            <button class="tab" onclick="showTab('mobiliario')">MOBILIARIO</button>
+            <button class="tab" onclick="showTab('toldos')">TOLDOS</button>
+            <button class="tab" onclick="showTab('infantiles')">INFANTILES</button>
+        </div>
+
+        <div id="paquetes" class="tab-content active">
+            <div class="products-grid" id="paquetes-products"></div>
+        </div>
+
+        <div id="mobiliario" class="tab-content">
+            <div class="products-grid" id="mobiliario-products"></div>
+        </div>
+
+        <div id="toldos" class="tab-content">
+            <div class="products-grid" id="toldos-products"></div>
+        </div>
+
+        <div id="infantiles" class="tab-content">
+            <div class="products-grid" id="infantiles-products"></div>
+        </div>
+
+        <div class="flete-section">
+            <h2>🚚 Flete</h2>
+            <div class="form-group">
+                <label for="municipio">Municipio:</label>
+                <select id="municipio" onchange="loadColonies()">
+                    <option value="">--Selecciona un municipio--</option>
+                    <option value="guadalajara">Guadalajara</option>
+                    <option value="zapopan">Zapopan</option>
+                    <option value="tlaquepaque">Tlaquepaque</option>
+                    <option value="tlajomulco">Tlajomulco</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="colonia">Colonia:</label>
+                <input list="colonias" id="colonia" disabled placeholder="--Primero selecciona un municipio--" oninput="filterColonies()" onchange="selectColony()">
+                <datalist id="colonias"></datalist>
+            </div>
+        </div>
+
+        <div class="resumen-section">
+            <h2>📋 Datos del Pedido</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody id="order-summary"></tbody>
+            </table>
+            <div class="total-section">
+                <div id="flete-info">Flete: $0</div>
+                <div class="total-amount" id="total-amount">Total: $0</div>
+            </div>
+        </div>
+
+        <div class="flete-section">
+            <h2>📅 Datos del Evento</h2>
+            <div class="form-group">
+                <label for="organizador">Nombre del organizador:</label>
+                <input type="text" id="organizador" placeholder="Ingresa el nombre del organizador">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="Ingresa el teléfono de contacto">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" placeholder="Ingresa la dirección del evento">
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha del evento:</label>
+                <input type="date" id="fecha">
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora del evento:</label>
+                <select id="hora">
+                    <option value="">--Selecciona una hora--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-reset" onclick="resetCart()">🔄 Restablecer Campos</button>
+            <button class="btn btn-whatsapp" onclick="sendWhatsApp()">📱 Solicitar Cotización</button>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            mobiliario: [
+                {name: "Silla cromada acojinada", price: 15},
+                {name: "Mesa 2.40", price: 100},
+                {name: "Mesa 1.80", price: 90},
+                {name: "Mesa 1.20", price: 80},
+                {name: "Mantel rectangular blanco", price: 80},
+                {name: "Mantel rectangular negro", price: 80},
+                {name: "Mantel redondo blanco", price: 100},
+                {name: "Mantel redondo negro", price: 100},
+                {name: "Bocina JBL", price: 500},
+                {name: "Bocina con micrófono", price: 600},
+                {name: "Asador", price: 300},
+                {name: "Hielera 90 lts", price: 300}
+            ],
+            toldos: [
+                {name: "Toldo 6x3", price: 700},
+                {name: "Toldo 3x3", price: 450},
+                {name: "Toldo 2x2", price: 350}
+            ],
+            infantiles: [
+                {name: "Mesita con 6 sillitas", price: 130},
+                {name: "Mesita con 4 sillitas", price: 110},
+                {name: "Silla infantil varios colores", price: 13},
+                {name: "Caballete infantil con accesorios", price: 250},
+                {name: "Mesa de hockey infantil", price: 250},
+                {name: "Futbolito Infantil", price: 250},
+                {name: "Brincolin 4x3", price: 500},
+                {name: "Brincolin 5x4", price: 600}
+            ],
+            paquetes: [
+                {name: "Mesa rectangular con 10 sillas", price: 200},
+                {name: "Mesa redonda con 10 sillas", price: 250},
+                {name: "Toldo 6x3 con 2 mesas y 20 sillas", price: 950},
+                {name: "Toldo 6x3 con 3 mesas y 30 sillas", price: 1100}
+            ]
+        };
+
+        const colonies = {
+            guadalajara: [
+                {name: "5 de Mayo", price: 50},
+                {name: "Agua Blanca", price: 100},
+                {name: "Alcalde Barranquitas", price: 50},
+                {name: "Americana", price: 150},
+                {name: "Analco", price: 100},
+                {name: "Arcos Sur", price: 100},
+                {name: "Arcos Vallarta", price: 100},
+                {name: "Artesanos", price: 50},
+                {name: "Atlas", price: 50},
+                {name: "Atemajac del Valle", price: 100},
+                {name: "Balcones de Oblatos", price: 100},
+                {name: "Barrera", price: 50},
+                {name: "Belisario Domínguez", price: 50},
+                {name: "Benito Juárez", price: 50},
+                {name: "Bosques de la Victoria", price: 150},
+                {name: "Centro", price: 100},
+                {name: "Chapalita", price: 100},
+                {name: "Chapultepec Country", price: 150},
+                {name: "Chapultepec Norte", price: 100},
+                {name: "Chapultepec Sur", price: 100},
+                {name: "Ciudad del Sol", price: 150},
+                {name: "Colinas de San Javier", price: 150},
+                {name: "Country Club", price: 150},
+                {name: "Del Fresno", price: 100},
+                {name: "Del Valle", price: 50},
+                {name: "Doctores", price: 50},
+                {name: "El Retiro", price: 150},
+                {name: "Ferrocarril", price: 50},
+                {name: "Fray Antonio Alcalde", price: 50},
+                {name: "Guadalupe Inn", price: 100},
+                {name: "Hidalgo", price: 50},
+                {name: "Independencia", price: 50},
+                {name: "Jardines de Guadalupe", price: 50},
+                {name: "Jardines de la Cruz", price: 100},
+                {name: "Jardines de los Arcos", price: 100},
+                {name: "Jardines del Bosque", price: 100},
+                {name: "Jardines del Country", price: 150},
+                {name: "Ladron de Guevara", price: 100},
+                {name: "Lafayette", price: 100},
+                {name: "Las Conchas", price: 100},
+                {name: "Lomas de Guadalupe", price: 100},
+                {name: "Lomas de Polanco", price: 150},
+                {name: "Lomas del Valle", price: 150},
+                {name: "Mezquitán Country", price: 150},
+                {name: "Minerva", price: 100},
+                {name: "Mirador del Sol", price: 150},
+                {name: "Moderna", price: 100},
+                {name: "Monraz", price: 150},
+                {name: "Oblatos", price: 50},
+                {name: "Olivos", price: 100},
+                {name: "Parques del Auditorio", price: 100},
+                {name: "Polanco", price: 150},
+                {name: "Providencia", price: 100},
+                {name: "Reforma", price: 100},
+                {name: "Residencial Victoria", price: 150},
+                {name: "San Juan de Dios", price: 100},
+                {name: "Santa Teresita", price: 100},
+                {name: "Tetlán", price: 50},
+                {name: "Vallarta Norte", price: 100},
+                {name: "Vallarta Poniente", price: 100},
+                {name: "Zona Rosa", price: 100}
+            ],
+            zapopan: [
+                {name: "Andares", price: 150},
+                {name: "Arroyo Hondo", price: 150},
+                {name: "Belenes", price: 100},
+                {name: "Chapalita Inn", price: 100},
+                {name: "Ciudad Granja", price: 100},
+                {name: "Constitución", price: 100},
+                {name: "El Colli", price: 150},
+                {name: "El Tigre", price: 150},
+                {name: "Francisco Silva Romero", price: 50},
+                {name: "Jardines de Nuevo México", price: 100},
+                {name: "Jardines del Valle", price: 100},
+                {name: "La Calma", price: 100},
+                {name: "Loma Bonita Ejidal", price: 150},
+                {name: "Lomas de Zapopan", price: 150},
+                {name: "Mesa Colorada", price: 150},
+                {name: "Nextipac", price: 150},
+                {name: "Olímpica", price: 100},
+                {name: "Patria", price: 100},
+                {name: "Pinar de la Calma", price: 100},
+                {name: "Plaza del Sol", price: 100},
+                {name: "Puerta de Hierro", price: 150},
+                {name: "Real de Tesistán", price: 150},
+                {name: "Rinconada del Sol", price: 150},
+                {name: "San Juan de Ocotán", price: 150},
+                {name: "Santa Margarita", price: 100},
+                {name: "Tabachines", price: 50},
+                {name: "Tesistán", price: 150},
+                {name: "Valle de los Molinos", price: 100},
+                {name: "Villas de Guadalupe", price: 50},
+                {name: "Zapopan Centro", price: 100}
+            ],
+            tlaquepaque: [
+                {name: "Artesanos", price: 50},
+                {name: "Buenos Aires", price: 50},
+                {name: "Centro Tlaquepaque", price: 100},
+                {name: "Cerro del Cuatro", price: 150},
+                {name: "El Árbol", price: 100},
+                {name: "El Refugio", price: 100},
+                {name: "El Tapatío", price: 100},
+                {name: "El Vergel", price: 100},
+                {name: "Jardines de la Paz", price: 100},
+                {name: "Jardines del Edén", price: 100},
+                {name: "La Experiencia", price: 100},
+                {name: "La Madrugada", price: 100},
+                {name: "Loma Dorada", price: 150},
+                {name: "Lomas de Tlaquepaque", price: 150},
+                {name: "Lomas del Paraíso", price: 150},
+                {name: "Miravalle", price: 100},
+                {name: "Parques de la Victoria", price: 150},
+                {name: "Paseos del Sol", price: 100},
+                {name: "Prados Tepeyac", price: 100},
+                {name: "Rancho Alegre", price: 100},
+                {name: "San Pedrito", price: 150},
+                {name: "Santa Anita", price: 50},
+                {name: "Toluquilla", price: 100},
+                {name: "Villas de Oriente", price: 100},
+                {name: "Zalatitán", price: 150}
+            ],
+            tlajomulco: [
+                {name: "Centro Tlajomulco", price: 150},
+                {name: "Chulavista", price: 150},
+                {name: "Haciendas de Tlajomulco", price: 100},
+                {name: "Jardines de la Calera", price: 100},
+                {name: "Jardines de la Montaña", price: 150},
+                {name: "Jardines de San Sebastián", price: 100},
+                {name: "Jardines de Tlajomulco", price: 100},
+                {name: "Jardines del Valle", price: 100},
+                {name: "Lomas de Chapultepec", price: 150},
+                {name: "Lomas de la Primavera", price: 150},
+                {name: "Lomas de Santa Anita", price: 150},
+                {name: "Lomas de Tlajomulco", price: 150},
+                {name: "Lomas del Bosque", price: 150},
+                {name: "Lomas del Sur", price: 150},
+                {name: "Parques de la Hacienda", price: 100},
+                {name: "Parques del Castillo", price: 150},
+                {name: "Paseos de la Hacienda", price: 100},
+                {name: "Paseos del Marques", price: 150},
+                {name: "Residencial Campestre", price: 150},
+                {name: "Residencial Esmeralda", price: 150},
+                {name: "Residencial Poniente", price: 150},
+                {name: "Rinconadas del Mirador", price: 150},
+                {name: "Valle Real", price: 100},
+                {name: "Villa California", price: 100},
+                {name: "Villa Coral", price: 100},
+                {name: "Villa Fontana", price: 100},
+                {name: "Villas de Ixtapa", price: 100},
+                {name: "Villas de San José", price: 100},
+                {name: "Villas del Campo", price: 100},
+                {name: "Villas del Pedregal", price: 150}
+            ]
+        };
+
+        let cart = {};
+        let fletePrice = 0;
+        let selectedColony = '';
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function createProductCard(product, category) {
+            const productId = `${category}-${product.name.replace(/\s+/g, '-').toLowerCase()}`;
+            
+            // Determinar la imagen según el producto
+            let imageSrc = '';
+            if (product.name === 'Mesa rectangular con 10 sillas') {
+                imageSrc = '<img src="mesa_con_10_sillas.png" alt="Mesa rectangular con 10 sillas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3 con 3 mesas y 30 sillas') {
+                imageSrc = '<img src="toldo_con_3_mesas.jpeg" alt="Toldo con 3 mesas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Silla cromada acojinada') {
+                imageSrc = '<img src="silla_acojinada.png" alt="Silla cromada acojinada" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa redonda con 10 sillas') {
+                imageSrc = '<img src="mesa_redonda.jpg" alt="Mesa redonda con 10 sillas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3') {
+                imageSrc = '<img src="toldo_6x3.png" alt="Toldo 6x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 6x3 con 2 mesas y 20 sillas') {
+                imageSrc = '<img src="Toldo con 2 mesas blanco.jpeg" alt="Toldo con 2 mesas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 2x2') {
+                imageSrc = '<img src="Toldo_2x2.jpeg" alt="Toldo 2x2" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Toldo 3x3') {
+                imageSrc = '<img src="Toldo_3x3.jpeg" alt="Toldo 3x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesita con 6 sillitas') {
+                imageSrc = '<img src="mesita6.png" alt="Mesita con 6 sillitas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesita con 4 sillitas') {
+                imageSrc = '<img src="mesita4.png" alt="Mesita con 4 sillitas" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Silla infantil varios colores') {
+                imageSrc = '<img src="silla_infantil.jpeg" alt="Silla infantil varios colores" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel rectangular blanco') {
+                imageSrc = '<img src="mantel_rect_blanco.png" alt="Mantel rectangular blanco" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel rectangular negro') {
+                imageSrc = '<img src="mantel_rect_negro.png" alt="Mantel rectangular negro" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel redondo blanco') {
+                imageSrc = '<img src="mantel_redondo_blanco.png" alt="Mantel redondo blanco" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mantel redondo negro') {
+                imageSrc = '<img src="mantel_redondo_negro.png" alt="Mantel redondo negro" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Hielera 90 lts') {
+                imageSrc = '<img src="hielera.jpg" alt="Hielera 90 lts" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 2.40') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 2.40" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 1.80') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 1.80" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa 1.20') {
+                imageSrc = '<img src="mesa.png" alt="Mesa 1.20" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Caballete infantil con accesorios') {
+                imageSrc = '<img src="caballete.jpeg" alt="Caballete infantil con accesorios" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Mesa de hockey infantil') {
+                imageSrc = '<img src="hockey.jpeg" alt="Mesa de hockey infantil" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Bocina con micrófono') {
+                imageSrc = '<img src="BocinaMicro.png" alt="Bocina con micrófono" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Bocina JBL') {
+                imageSrc = '<img src="bocina jbl.png" alt="Bocina JBL" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Asador') {
+                imageSrc = '<img src="asador.jpeg" alt="Asador" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Brincolin 4x3') {
+                imageSrc = '<img src="brincolin.jpeg" alt="Brincolin 4x3" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Brincolin 5x4') {
+                imageSrc = '<img src="brincolin5x4.jpeg" alt="Brincolin 5x4" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else if (product.name === 'Futbolito Infantil') {
+                imageSrc = '<img src="futbolito.jpeg" alt="Futbolito Infantil" style="width:100%;height:200px;object-fit:contain;background:white;border-radius:5px;">';
+            } else {
+                imageSrc = '📦 Imagen';
+            }
+            
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        ${imageSrc}
+                    </div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">$${product.price}</div>
+                    <div class="quantity-section">
+                        <label>Cantidad:</label>
+                        <input type="number" class="quantity-input" id="${productId}" 
+                               min="0" max="100" value="0"
+                               onchange="updateCart('${productId}', '${product.name}', ${product.price})">
+                    </div>
+                    <div class="product-total" id="${productId}-total">Importe: $0</div>
+                </div>
+            `;
+        }
+
+        function loadProducts() {
+            Object.keys(products).forEach(category => {
+                const container = document.getElementById(`${category}-products`);
+                container.innerHTML = products[category]
+                    .map(product => createProductCard(product, category))
+                    .join('');
+            });
+        }
+
+        function updateCart(productId, productName, price) {
+            const quantity = parseInt(document.getElementById(productId).value) || 0;
+            const total = quantity * price;
+            
+            document.getElementById(`${productId}-total`).textContent = `Importe: $${total}`;
+            
+            if (quantity > 0) {
+                cart[productId] = {name: productName, quantity, price, total};
+            } else {
+                delete cart[productId];
+            }
+            
+            updateOrderSummary();
+        }
+
+        let currentMunicipio = '';
+        
+        function loadColonies() {
+            const municipio = document.getElementById('municipio').value;
+            const coloniaInput = document.getElementById('colonia');
+            const coloniasList = document.getElementById('colonias');
+            
+            currentMunicipio = municipio;
+            coloniasList.innerHTML = '';
+            coloniaInput.value = '';
+            
+            if (municipio && colonies[municipio]) {
+                coloniaInput.disabled = false;
+                coloniaInput.placeholder = 'Escribe o selecciona una colonia';
+                colonies[municipio].forEach(colony => {
+                    const option = document.createElement('option');
+                    option.value = `${colony.name} - $${colony.price}`;
+                    option.setAttribute('data-colony', JSON.stringify(colony));
+                    coloniasList.appendChild(option);
+                });
+            } else {
+                coloniaInput.disabled = true;
+                coloniaInput.placeholder = '--Primero selecciona un municipio--';
+                fletePrice = 0;
+                selectedColony = '';
+                updateOrderSummary();
+            }
+        }
+        
+        function filterColonies() {
+            const input = document.getElementById('colonia').value.toLowerCase();
+            const coloniasList = document.getElementById('colonias');
+            
+            if (!currentMunicipio || !colonies[currentMunicipio]) return;
+            
+            coloniasList.innerHTML = '';
+            
+            const filtered = colonies[currentMunicipio].filter(colony => 
+                colony.name.toLowerCase().includes(input)
+            );
+            
+            filtered.forEach(colony => {
+                const option = document.createElement('option');
+                option.value = `${colony.name} - $${colony.price}`;
+                option.setAttribute('data-colony', JSON.stringify(colony));
+                coloniasList.appendChild(option);
+            });
+        }
+
+        function selectColony() {
+            const coloniaInput = document.getElementById('colonia');
+            const coloniasList = document.getElementById('colonias');
+            const inputValue = coloniaInput.value;
+            
+            // Buscar en las opciones del datalist
+            const options = coloniasList.querySelectorAll('option');
+            let foundColony = null;
+            
+            for (let option of options) {
+                if (option.value === inputValue) {
+                    foundColony = JSON.parse(option.getAttribute('data-colony'));
+                    break;
+                }
+            }
+            
+            // También buscar por coincidencia exacta del nombre
+            if (!foundColony && currentMunicipio && colonies[currentMunicipio]) {
+                foundColony = colonies[currentMunicipio].find(colony => 
+                    inputValue.toLowerCase().includes(colony.name.toLowerCase())
+                );
+            }
+            
+            if (foundColony) {
+                fletePrice = foundColony.price;
+                selectedColony = foundColony.name;
+            } else {
+                fletePrice = 0;
+                selectedColony = '';
+            }
+            
+            updateOrderSummary();
+        }
+
+        function updateOrderSummary() {
+            const tbody = document.getElementById('order-summary');
+            const fleteInfo = document.getElementById('flete-info');
+            const totalAmount = document.getElementById('total-amount');
+            
+            let html = '';
+            let subtotal = 0;
+            
+            Object.values(cart).forEach(item => {
+                html += `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>$${item.price}</td>
+                        <td>$${item.total}</td>
+                    </tr>
+                `;
+                subtotal += item.total;
+            });
+            
+            tbody.innerHTML = html;
+            fleteInfo.textContent = `Flete (${selectedColony || 'No seleccionado'}): $${fletePrice}`;
+            totalAmount.textContent = `Total: $${subtotal + fletePrice}`;
+        }
+
+        function resetCart() {
+            cart = {};
+            fletePrice = 0;
+            selectedColony = '';
+            
+            document.querySelectorAll('.quantity-input').forEach(input => input.value = 0);
+            document.querySelectorAll('[id$="-total"]').forEach(total => total.textContent = 'Importe: $0');
+            document.getElementById('municipio').value = '';
+            document.getElementById('colonia').value = '';
+            document.getElementById('colonia').placeholder = '--Primero selecciona un municipio--';
+            document.getElementById('colonia').disabled = true;
+            document.getElementById('colonias').innerHTML = '';
+            
+            // Reset event data
+            document.getElementById('organizador').value = '';
+            document.getElementById('telefono').value = '';
+            document.getElementById('direccion').value = '';
+            document.getElementById('fecha').value = '';
+            document.getElementById('hora').value = '';
+            
+            updateOrderSummary();
+        }
+
+        function sendWhatsApp() {
+            let message = "📋 *Hola, necesito confirmar disponibilidad para la siguiente cotizacion:*\n\n";
+            
+            if (Object.keys(cart).length === 0) {
+                alert('Por favor selecciona al menos un producto');
+                return;
+            }
+            
+            // Datos del evento
+            const organizador = document.getElementById('organizador').value;
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            
+            if (organizador || telefono || direccion || fecha || hora) {
+                message += "📅 *DATOS DEL EVENTO:*\n";
+                if (organizador) message += `• Organizador: ${organizador}\n`;
+                if (telefono) message += `• Teléfono: ${telefono}\n`;
+                if (direccion) message += `• Dirección: ${direccion}\n`;
+                if (fecha) message += `• Fecha: ${fecha}\n`;
+                if (hora) message += `• Hora: ${hora}\n`;
+                message += "\n";
+            }
+            
+            message += "📦 *PRODUCTOS:*\n";
+            let subtotal = 0;
+            
+            Object.values(cart).forEach(item => {
+                message += `• ${item.name} - Cantidad: ${item.quantity} - $${item.price} c/u = $${item.total}\n`;
+                subtotal += item.total;
+            });
+            
+            message += `\n🚚 *FLETE:* ${selectedColony || 'No seleccionado'} - $${fletePrice}\n`;
+            message += `\n💰 *TOTAL: $${subtotal + fletePrice}*\n\n`;
+            message += "¡Gracias! 🎉";
+            
+            const whatsappUrl = `https://wa.me/523314423619?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Generar horarios
+        function generateTimeOptions() {
+            const horaSelect = document.getElementById('hora');
+            let hour = 8;
+            let minute = 0;
+            
+            while (hour < 20 || (hour === 20 && minute <= 30)) {
+                const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                const option = document.createElement('option');
+                option.value = timeString;
+                option.textContent = timeString;
+                horaSelect.appendChild(option);
+                
+                minute += 30;
+                if (minute >= 60) {
+                    minute = 0;
+                    hour++;
+                }
+            }
+        }
+
+        // Establecer fecha mínima como hoy
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const fechaEl = document.getElementById('fecha');
+            if (!fechaEl) return;
+            fechaEl.min = today;
+
+            // Prevent selecting or entering past dates: enforce min on input/change
+            const enforceMin = () => {
+                try {
+                    if (!fechaEl.value) return;
+                    if (fechaEl.value < fechaEl.min) {
+                        fechaEl.value = fechaEl.min;
+                    }
+                } catch (err) {
+                    // ignore
+                }
+            };
+
+            fechaEl.addEventListener('change', enforceMin);
+            fechaEl.addEventListener('input', enforceMin);
+        }
+
+        // Handle tab switching from URL hash
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['paquetes', 'mobiliario', 'toldos', 'infantiles'].includes(hash)) {
+                showTabByName(hash);
+            }
+        }
+
+        function showTabByName(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            const targetTab = Array.from(document.querySelectorAll('.tab')).find(tab => 
+                tab.textContent.toLowerCase().includes(tabName === 'infantiles' ? 'infantiles' : tabName)
+            );
+            if (targetTab) targetTab.classList.add('active');
+            
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) targetContent.classList.add('active');
+        }
+
+        // Inicializar la página
+        loadProducts();
+    // Attach quantity input handlers (clear on focus, numeric-only, restore 0 on blur)
+    attachQuantityInputHandlers();
+    // Toggle terms handler defined below
+        generateTimeOptions();
+        setMinDate();
+        handleHashChange();
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Image protection
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+
+        // Attach handlers to quantity inputs: clear on focus, numeric-only input,
+        // and restore zero on blur (then trigger change to recalc cart)
+        function attachQuantityInputHandlers() {
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                // clear default zero on focus so user can type
+                input.addEventListener('focus', (e) => {
+                    try {
+                        if (e.target.value === '0') e.target.value = '';
+                    } catch (err) {}
+                });
+
+                // enforce numeric-only characters (digits) as user types
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    // allow only digits
+                    const cleaned = val.replace(/[^0-9]/g, '');
+                    if (cleaned !== val) e.target.value = cleaned;
+                });
+
+                // on blur, if empty set back to 0 and trigger change to update cart
+                input.addEventListener('blur', (e) => {
+                    const v = e.target.value;
+                    if (!v || v.toString().trim() === '') {
+                        e.target.value = '0';
+                    }
+                    // trigger change handler so totals update
+                    e.target.dispatchEvent(new Event('change'));
+                });
+            });
+        }
+
+        // Toggle the terms and conditions content
+        function toggleTerms(btn) {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            const content = document.getElementById('termsContent');
+            if (!content) return;
+            if (expanded) {
+                btn.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                content.setAttribute('aria-hidden', 'true');
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.classList.add('open');
+                content.setAttribute('aria-hidden', 'false');
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<!-- This file was created as a copy of carrito.html to serve as the 'cotizacion' landing after login. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alebrijes Diversión Total - Cotización</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        /* Terms section */
+        .terms-section {
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+        
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+                        background-size: 400% 400%;
+                        animation: gradientShift 15s ease infinite;
+                        min-height: 100vh;
+                    }
+        
+                    @keyframes gradientShift {
+                        0% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                        100% { background-position: 0% 50%; }
+                    }
+        
+                    .container {
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        padding: 20px;
+                    }
+        
+                    header {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        text-align: center;
+                        padding: 2rem;
+                        border-radius: 10px;
+                        margin-bottom: 2rem;
+                    }
+        
+                    /* Terms section */
+                    .terms-section {
+                        margin-bottom: 1rem;
+                    }
+        
+                    .terms-btn {
+                        width: 100%;
+                        text-align: left;
+                        background: #fff3cd;
+                        color: #856404;
+                        border: 1px solid #ffeeba;
+                        padding: 0.75rem 1rem;
+                        border-radius: 8px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+        
+                    .terms-btn:after {
+                        content: '\25BC'; /* down arrow */
+                        font-size: 1rem;
+                        transition: transform 0.25s ease;
+                    }
+        
+                    .terms-btn[aria-expanded="true"]:after {
+                        transform: rotate(180deg);
+                    }
+        
+                    .terms-content {
+                        background: #fffef0;
+                        border: 1px solid #ffeeba;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        margin-top: 0.5rem;
+                        display: none;
+                    }
+        
+                    /* Add indentation/padding before the numbers in ordered lists inside terms */
+                    .terms-content ol {
+                        padding-left: 1.25rem; /* space before the list numbers */
+                        margin-left: 0.25rem;
+                        list-style-position: outside;
+                    }
+        
+                    .terms-content.open {
+                        display: block;
+                    }
+        
+                    .tabs {
+                        display: flex;
+                        background: white;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        margin-bottom: 2rem;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    }
+        
+                    .tab {
+                        flex: 1;
+                        padding: 1rem;
+                        background: #e9ecef;
+                        border: none;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        transition: all 0.3s;
+                    }
+        
+                    .tab.active {
+                        background: #667eea;
+                        color: white;
+                    }
+        
+                    .tab-content {
+                        display: none;
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        margin-bottom: 2rem;
+                    }
+        
+                    .tab-content.active {
+                        display: block;
+                    }
+        
+                    .products-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 1.5rem;
+                    }
+        
+                    .product-card {
+                        background: #f8f9fa;
+                        border-radius: 10px;
+                        padding: 1.5rem;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+        
+                    .product-image {
+                        width: 100%;
+                        height: 200px;
+                        background: #ddd;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 1rem;
+                        color: #666;
+                        position: relative;
+                    }
+        
+                    /* Video buttons removed per request (video playback removed from page) */
+        
+                    .product-name {
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        margin-bottom: 0.5rem;
+                    }
+        
+                    .product-price {
+                        font-size: 1.1rem;
+                        color: #667eea;
+                        font-weight: bold;
+                        margin-bottom: 1rem;
+                    }
+        
+                    .quantity-section {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        margin-bottom: 1rem;
+                    }
+        
+                    .quantity-input {
+                        width: 80px;
+                        padding: 0.5rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                    }
+        
+                    .product-total {
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: #28a745;
+                    }
+        
+                    .flete-section, .resumen-section {
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        margin-bottom: 2rem;
+                    }
+        
+                    .form-group {
+                        margin-bottom: 1rem;
+                    }
+        
+                    label {
+                        display: block;
+                        margin-bottom: 0.5rem;
+                        font-weight: bold;
+                    }
+        
+                    select, input {
+                        width: 100%;
+                        padding: 0.75rem;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        font-size: 1rem;
+                    }
+        
+                    .order-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-bottom: 1rem;
+                    }
+        
+                    .order-table th, .order-table td {
+                        padding: 0.75rem;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+        
+                    .order-table th {
+                        background: #f8f9fa;
+                        font-weight: bold;
+                    }
+        
+                    .total-section {
+                        background: #e9ecef;
+                        padding: 1rem;
+                        border-radius: 5px;
+                        margin-top: 1rem;
+                    }
+        
+                    .total-amount {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #667eea;
+                    }
+        
+                    .buttons {
+                        display: flex;
+                        gap: 1rem;
+                        margin-top: 2rem;
+                    }
+        
+                    .btn {
+                        flex: 1;
+                        padding: 1rem;
+                        border: none;
+                        border-radius: 5px;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+        
+                    .btn-reset {
+                        background: #dc3545;
+                        color: white;
+                    }
+        
+                    .btn-whatsapp {
+                        background: #25d366;
+                        color: white;
+                    }
+        
+                    .btn:hover {
+                        opacity: 0.9;
+                        transform: translateY(-2px);
+                    }
+        
+                    /* Image Protection */
+                    img {
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                        -webkit-user-drag: none;
+                        -khtml-user-drag: none;
+                        -moz-user-drag: none;
+                        -o-user-drag: none;
+                        user-drag: none;
+                        pointer-events: none;
+                    }
+        
+                    @media (max-width: 768px) {
+                        .tabs {
+                            flex-direction: column;
+                        }
+            
+                        .products-grid {
+                            grid-template-columns: 1fr;
+                        }
+            
+                        .quantity-section {
+                            flex-direction: column;
+                            align-items: flex-start;
+                        }
+            
+                        .buttons {
+                            flex-direction: column;
+                        }
+                        /* Keep order table on a single line per row on mobile: smaller font, no wrapping, ellipsis.
+                           Add horizontal scroll fallback inside the resumen section so the row stays one line. */
+                        .resumen-section {
+                            overflow-x: auto; /* allow horizontal scroll if needed */
+                        }
+        
+                        .order-table {
+                            width: 100%;
+                            min-width: 320px; /* avoid collapsing too small */
+                            table-layout: fixed; /* enforce column widths */
+                            border-collapse: collapse;
+                        }
+        
+                        .order-table th, .order-table td {
+                            padding: 0.25rem 0.35rem;
+                            font-size: 0.78rem; /* reduce font to fit */
+                            white-space: nowrap; /* keep content on one line */
+                            overflow: hidden;
+                            text-overflow: ellipsis; /* show ... when content is too long */
+                        }
+        
+                        /* Allocate widths so the product column gets more room but still fits */
+                        .order-table th:first-child, .order-table td:first-child {
+                            width: 50%;
+                            text-align: left;
+                        }
+        
+                        .order-table th:nth-child(2), .order-table td:nth-child(2) {
+                            width: 16.66%;
+                            text-align: center;
+                        }
+        
+                        .order-table th:nth-child(3), .order-table td:nth-child(3) {
+                            width: 16.66%;
+                            text-align: right;
+                        }
+        
+                        .order-table th:nth-child(4), .order-table td:nth-child(4) {
+                            width: 16.66%;
+                            text-align: right;
+                        }
+                    }
             text-align: left;
             background: #fff3cd;
             color: #856404;
