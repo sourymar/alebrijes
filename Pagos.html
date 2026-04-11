@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pagos - Revisión</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:20px}
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid #ddd;padding:8px}
+    th{background:#f4f4f4}
+    .controls{margin-bottom:16px}
+  </style>
+</head>
+<body>
+  <h1>Pagos registrados</h1>
+  <div class="controls">
+    <button id="refreshBtn">Refrescar</button>
+    <input type="file" id="importFile" accept="text/*">
+    <button id="clearBtn">Limpiar todos</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Cuenta Origen</th>
+        <th>Cuenta Destino</th>
+        <th>Cantidad</th>
+        <th>Fecha de pago</th>
+        <th>Tipo</th>
+        <th>Terminación</th>
+        <th>Estatus</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody id="paymentsTbody"></tbody>
+  </table>
+
+  <script>
+    function renderPayments() {
+      const tbody = document.getElementById('paymentsTbody');
+      const stored = JSON.parse(localStorage.getItem('payments') || '[]');
+      tbody.innerHTML = '';
+      stored.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.user || ''}</td>
+          <td>${p.cuentaOrigen || ''}</td>
+          <td>${p.cuentaDestino || ''}</td>
+          <td>$${p.cantidad}</td>
+          <td>${p.fechaPago || ''}</td>
+          <td>${p.tipoPago || ''}</td>
+          <td>${p.terminacion || ''}${p.nPagos?(' / '+p.nPagos+' pagos'):''}${p.terminacionFecha?(' / '+p.terminacionFecha):''}</td>
+          <td>${p.status || ''}</td>
+          <td>${p.timestamp || ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', renderPayments);
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (!confirm('¿Eliminar todos los pagos almacenados?')) return;
+      localStorage.removeItem('payments');
+      renderPayments();
+    });
+
+    document.getElementById('importFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(){
+        const text = reader.result;
+        // assume newline-delimited JSON
+        const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+        const parsed = [];
+        lines.forEach(l=>{
+          try { parsed.push(JSON.parse(l)); } catch(err) { console.warn('parse error', err); }
+        });
+        const stored = JSON.parse(localStorage.getItem('payments')||'[]');
+        const merged = stored.concat(parsed);
+        localStorage.setItem('payments', JSON.stringify(merged));
+        renderPayments();
+        alert('Importado ' + parsed.length + ' pagos (si hubo errores, se ignoraron líneas inválidas).');
+      };
+      reader.readAsText(file);
+    });
+
+    // Initial render
+    renderPayments();
+  </script>
+</body>
+</html>

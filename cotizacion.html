@@ -539,29 +539,41 @@
             </div>
         </div>
 
-        <div class="flete-section">
-            <h2>📅 Datos del Evento</h2>
+        <div class="flete-section" id="payment-section">
+            <h2>� Datos de pago</h2>
             <div class="form-group">
-                <label for="organizador">Nombre del organizador:</label>
-                <input type="text" id="organizador" placeholder="Ingresa el nombre del organizador">
+                <label for="cuentaOrigen">Cuenta origen:</label>
+                <input type="text" id="cuentaOrigen" placeholder="Número o CLABE de origen">
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" placeholder="Ingresa el teléfono de contacto">
+                <label for="cuentaDestino">Cuenta destino:</label>
+                <input type="text" id="cuentaDestino" placeholder="Número o CLABE de destino">
             </div>
             <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" placeholder="Ingresa la dirección del evento">
+                <label for="cantidadPago">Cantidad (MXN):</label>
+                <input type="number" id="cantidadPago" placeholder="0" min="0" step="0.01">
             </div>
             <div class="form-group">
-                <label for="fecha">Fecha del evento:</label>
-                <input type="date" id="fecha">
+                <label for="fechaPago">Fecha de pago:</label>
+                <input type="date" id="fechaPago">
             </div>
+
             <div class="form-group">
-                <label for="hora">Hora del evento:</label>
-                <select id="hora">
-                    <option value="">--Selecciona una hora--</option>
-                </select>
+                <label>Tipo de pago:</label>
+                <label><input type="radio" name="tipoPago" value="una" checked> Una vez</label>
+                <label><input type="radio" name="tipoPago" value="recurrente"> Recurrente</label>
+            </div>
+
+            <div id="terminacionPago" style="display:none; border-left:3px solid #eee; padding-left:10px; margin-top:10px;">
+                <h3>Terminación del pago</h3>
+                <label><input type="radio" name="terminacion" value="por_cancelacion" checked> Por cancelación</label><br>
+                <label><input type="radio" name="terminacion" value="despues_de_n_pagos"> Después de <input type="number" id="nPagos" min="1" value="1" style="width:80px; display:inline-block;"> pagos</label><br>
+                <label><input type="radio" name="terminacion" value="en_fecha"> En fecha <input type="date" id="terminacionFecha"></label>
+            </div>
+
+            <div style="margin-top:12px;">
+                <button class="btn btn-whatsapp" id="pagarBtn">💸 Pagar</button>
+                <div id="payment-status" style="margin-top:8px;font-weight:bold;"></div>
             </div>
         </div>
 
@@ -1176,6 +1188,113 @@
                 });
             });
         }
+
+        // Payment form initialization and handlers
+        function initPaymentForm() {
+            const today = new Date().toISOString().split('T')[0];
+            const fechaPago = document.getElementById('fechaPago');
+            const terminacionFecha = document.getElementById('terminacionFecha');
+            if (fechaPago) fechaPago.min = today;
+            if (terminacionFecha) terminacionFecha.min = today;
+
+            // Show/hide terminacion block when 'Recurrente' selected
+            document.querySelectorAll('input[name="tipoPago"]').forEach(r => {
+                r.addEventListener('change', (e) => {
+                    const val = e.target.value;
+                    const block = document.getElementById('terminacionPago');
+                    if (block) block.style.display = (val === 'recurrente') ? 'block' : 'none';
+                });
+            });
+
+            const pagarBtn = document.getElementById('pagarBtn');
+            if (pagarBtn) pagarBtn.addEventListener('click', handlePagar);
+        }
+
+        function handlePagar() {
+            const cuentaOrigen = (document.getElementById('cuentaOrigen')||{}).value || '';
+            const cuentaDestino = (document.getElementById('cuentaDestino')||{}).value || '';
+            const cantidadRaw = (document.getElementById('cantidadPago')||{}).value || '0';
+            const cantidad = parseFloat(cantidadRaw) || 0;
+            const fechaPago = (document.getElementById('fechaPago')||{}).value || '';
+            const tipoPago = document.querySelector('input[name="tipoPago"]:checked') ? document.querySelector('input[name="tipoPago"]:checked').value : 'una';
+
+            // Terminacion details
+            const terminacion = document.querySelector('input[name="terminacion"]:checked') ? document.querySelector('input[name="terminacion"]:checked').value : 'por_cancelacion';
+            let nPagos = null;
+            let terminacionFecha = '';
+            if (terminacion === 'despues_de_n_pagos') {
+                nPagos = parseInt((document.getElementById('nPagos')||{}).value) || 0;
+            } else if (terminacion === 'en_fecha') {
+                terminacionFecha = (document.getElementById('terminacionFecha')||{}).value || '';
+            }
+
+            // Validate fechaPago is not in the past
+            const today = new Date().toISOString().split('T')[0];
+            if (fechaPago && fechaPago < today) {
+                alert('La fecha de pago no puede ser anterior a hoy.');
+                return;
+            }
+            if (terminacionFecha && terminacionFecha < today) {
+                alert('La fecha de terminación no puede ser anterior a hoy.');
+                return;
+            }
+
+            // Determine payment status by amount
+            let status = 'En proceso';
+            if (cantidad < 200) {
+                status = 'En proceso';
+            } else if (cantidad >= 200 && cantidad <= 400) {
+                status = 'Requiere una aprobacion';
+            } else if (cantidad > 400) {
+                status = 'Requiere dos aprobaciones';
+            }
+
+            const payment = {
+                id: 'pay_' + Date.now(),
+                user: sessionStorage.getItem('loggedUser') || 'unknown',
+                cuentaOrigen,
+                cuentaDestino,
+                cantidad,
+                fechaPago,
+                tipoPago,
+                terminacion: terminacion,
+                nPagos: nPagos,
+                terminacionFecha: terminacionFecha,
+                status,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save in localStorage (acts as review queue) and create/update payments.txt content
+            try {
+                const stored = JSON.parse(localStorage.getItem('payments') || '[]');
+                stored.push(payment);
+                localStorage.setItem('payments', JSON.stringify(stored));
+
+                // Create text content as newline-delimited JSON entries
+                const content = stored.map(p => JSON.stringify(p)).join('\n');
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'payments.txt';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+
+                // Update UI
+                const statusEl = document.getElementById('payment-status');
+                if (statusEl) statusEl.textContent = `Estado: ${status}`;
+                alert('Pago registrado. Se ha descargado payments.txt para su revisión.');
+            } catch (err) {
+                alert('Error al guardar el pago: ' + (err.message || err));
+            }
+        }
+
+        // Initialize payment form behavior after the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initPaymentForm();
+        });
 
         // Toggle the terms and conditions content
         function toggleTerms(btn) {
