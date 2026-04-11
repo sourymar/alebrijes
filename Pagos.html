@@ -16,6 +16,7 @@
   <h1>Pagos registrados</h1>
   <div class="controls">
     <button id="refreshBtn">Refrescar</button>
+    <button id="exportBtn">Exportar pagos (.txt)</button>
     <input type="file" id="importFile" accept="text/*">
     <button id="clearBtn">Limpiar todos</button>
   </div>
@@ -65,6 +66,20 @@
       if (!confirm('¿Eliminar todos los pagos almacenados?')) return;
       localStorage.removeItem('payments');
       renderPayments();
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const stored = JSON.parse(localStorage.getItem('payments') || '[]');
+      const content = stored.map(p => JSON.stringify(p)).join('\n');
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'pagos.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     });
 
     document.getElementById('importFile').addEventListener('change', (e) => {

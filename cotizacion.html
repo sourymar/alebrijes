@@ -1276,7 +1276,8 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'payments.txt';
+                // Download as pagos.txt to match naming requested
+                a.download = 'pagos.txt';
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
@@ -1285,7 +1286,7 @@
                 // Update UI
                 const statusEl = document.getElementById('payment-status');
                 if (statusEl) statusEl.textContent = `Estado: ${status}`;
-                alert('Pago registrado. Se ha descargado payments.txt para su revisión.');
+                alert('Pago registrado. Se ha descargado pagos.txt para su revisión.');
             } catch (err) {
                 alert('Error al guardar el pago: ' + (err.message || err));
             }
