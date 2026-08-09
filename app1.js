@@ -1,7 +1,7 @@
 // app.js
 
 const productos = [
-    { id: 1, nombre: 'Mesa con 10 sillas', precio: 200, imagen: 'mesa10sillas.jpg' },
+    { id: 1, nombre: 'Mesa con 10 sillas', precio: 220, imagen: 'mesa10sillas.jpg' },
     { id: 2, nombre: 'Mesa', precio: 80, imagen: 'mesa.jpg' },
     { id: 3, nombre: 'Silla acojinada', precio: 15, imagen: 'silla.jpg' },
     { id: 4, nombre: 'Mantel blanco o negro', precio: 80, imagen: 'mantel.jpg' },

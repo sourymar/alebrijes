@@ -1,7 +1,7 @@
 // app.js
 
 const productos = [
-    { id: 1, nombre: "Mesa plegable con 10 sillas", precio: 200, imagen: "mesa_con_10_sillas.png" },
+    { id: 1, nombre: "Mesa plegable con 10 sillas", precio: 220, imagen: "mesa_con_10_sillas.png" },
     { id: 2, nombre: "Mesa redonda con 10 sillas", precio: 250, imagen: "mesa_redonda.jpg" },
     { id: 3, nombre: "Mesa 2.40 mts.", precio: 100, imagen: "mesa.png" },
     { id: 4, nombre: "Mesa 1.80 mts.", precio: 90, imagen: "mesa.png" },
