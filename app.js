@@ -15,7 +15,7 @@ const productos = [
     { id: 12, nombre: "Toldo 6x3", precio: 650, imagen: "toldo_6x3.png" },
     { id: 13, nombre: "Toldo con 1 mesa rectangular y 10 sillas", precio: 800, imagen: "toldo_con_1_mesa.png" },
     { id: 14, nombre: "Toldo con 2 mesas rectangulares y 20 sillas", precio: 950, imagen: "toldo_con_1_mesa.png" },
-    { id: 15, nombre: "Toldo con 3 mesas rectangulares y 30 sillas", precio: 1100, imagen: "toldo_con_3_mesas.jpeg" },
+    { id: 15, nombre: "Toldo con 3 mesas rectangulares y 30 sillas", precio: 1200, imagen: "toldo_con_3_mesas.jpeg" },
     { id: 16, nombre: "Hielera 90 lts.", precio: 300, imagen: "hielera.jpg" },
     { id: 17, nombre: "Asador con 1 bolsa de carbón y utensilios", precio: 450, imagen: "asador.jpg" },
     { id: 18, nombre: "Bocina bluetooth con tripie", precio: 350, imagen: "bocina.png" },
