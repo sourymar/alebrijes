@@ -29,7 +29,9 @@
 # Private inventory runtime files #
 ###################################
 inventario-system/.env
+inventario-system/.env.example
 inventario-system/.env.*.local
+inventario-system/config/secrets.template.env
 inventario-system/node_modules/
 
 # OS generated files #
