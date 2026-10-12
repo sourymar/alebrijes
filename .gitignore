@@ -26,6 +26,12 @@
 *.sql
 *.sqlite
 
+# Private inventory runtime files #
+###################################
+inventario-system/.env
+inventario-system/.env.*.local
+inventario-system/node_modules/
+
 # OS generated files #
 ######################
 .DS_Store
