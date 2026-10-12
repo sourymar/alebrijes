@@ -659,7 +659,8 @@
                 {name: "Tetlán", price: 50},
                 {name: "Vallarta Norte", price: 100},
                 {name: "Vallarta Poniente", price: 100},
-                {name: "Zona Rosa", price: 100}
+                {name: "Zona Rosa", price: 100},
+                {name: "Otra", price: "Por confirmar"}
             ],
             zapopan: [
                 {name: "LOMA BONITA EJIDAL", price: 70},
@@ -811,7 +812,8 @@
                 {name: "CAMICHINES VALLARTA", price: 150},
                 {name: "CONJUNTO RESIDENCIAL LA PEÑA", price: 150},
                 {name: "VIGUSA", price: 150},
-                {name: "DE SANTA RITA", price: 150}
+                {name: "DE SANTA RITA", price: 150},
+                {name: "Otra", price: "Por confirmar"}
             ],
             tlaquepaque: [
                 {name: "Artesanos", price: 50},
@@ -838,7 +840,8 @@
                 {name: "Santa Anita", price: 50},
                 {name: "Toluquilla", price: 100},
                 {name: "Villas de Oriente", price: 100},
-                {name: "Zalatitán", price: 150}
+                {name: "Zalatitán", price: 150},
+                {name: "Otra", price: "Por confirmar"}
             ],
             tlajomulco: [
                 {name: "Centro Tlajomulco", price: 150},
@@ -870,7 +873,8 @@
                 {name: "Villas de Ixtapa", price: 100},
                 {name: "Villas de San José", price: 100},
                 {name: "Villas del Campo", price: 100},
-                {name: "Villas del Pedregal", price: 150}
+                {name: "Villas del Pedregal", price: 150},
+                {name: "Otra", price: "Por confirmar"}
             ]
         };
 
@@ -992,6 +996,11 @@
         }
 
         let currentMunicipio = '';
+
+        function formatColonyOption(colony) {
+            const price = typeof colony.price === 'number' ? `$${colony.price}` : colony.price;
+            return `${colony.name} - ${price}`;
+        }
         
         function loadColonies() {
             const municipio = document.getElementById('municipio').value;
@@ -1007,7 +1016,7 @@
                 coloniaInput.placeholder = 'Escribe o selecciona una colonia';
                 colonies[municipio].forEach(colony => {
                     const option = document.createElement('option');
-                    option.value = `${colony.name} - $${colony.price}`;
+                    option.value = formatColonyOption(colony);
                     option.setAttribute('data-colony', JSON.stringify(colony));
                     coloniasList.appendChild(option);
                 });
@@ -1034,7 +1043,7 @@
             
             filtered.forEach(colony => {
                 const option = document.createElement('option');
-                option.value = `${colony.name} - $${colony.price}`;
+                option.value = formatColonyOption(colony);
                 option.setAttribute('data-colony', JSON.stringify(colony));
                 coloniasList.appendChild(option);
             });
@@ -1095,8 +1104,9 @@
             });
             
             tbody.innerHTML = html;
-            fleteInfo.textContent = `Flete (${selectedColony || 'No seleccionado'}): $${fletePrice}`;
-            totalAmount.textContent = `Total: $${subtotal + fletePrice}`;
+            const freightIsPending = typeof fletePrice !== 'number';
+            fleteInfo.textContent = `Flete (${selectedColony || 'No seleccionado'}): ${freightIsPending ? fletePrice : `$${fletePrice}`}`;
+            totalAmount.textContent = `Total: $${subtotal + (freightIsPending ? 0 : fletePrice)}`;
         }
 
         function resetCart() {
